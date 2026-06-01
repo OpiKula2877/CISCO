@@ -118,3 +118,12 @@ Princip: Uživatel komunikuje s operačním systémem pomocí ukazování a klik
   - Klasický switch (přepínač) funguje na 2. vrstvě OSI modelu (Data Link Layer). To znamená, že pracuje s MAC adresami a standardně nemá žádnou IP adresu. Jeho fyzické porty slouží pouze k propojování počítačů a neumí samy o sobě komunikovat na úrovni IP protokolu.
 
   - SVI je virtuální rozhraní vytvořené uvnitř softwaru switche, kterému můžeš přiřadit IP adresu. Protože je virtuální, nemá žádný svůj vlastní fyzický port. Místo toho se v Cisco zařízeních váže na konkrétní VLAN (virtuální síť). Nejčastěji se setkáš s rozhraním VLAN 1 (interface vlan 1), což je výchozí management VLAN na Cisco switchích.
+
+
+| PDU (Název jednotky) | Síťová vrstva | S čím pracuje (Adresování) | Hlavní zařízení |
+|---|---|---|---|
+| DATA | Aplikační / Prezenční / Relační | Protokoly (HTTP, FTP, SMTP...) | Počítač / Server |
+| SEGMENT (Datagram) | Transportní | Porty (např. 80, 443, 22) | Koncový hostitel |
+| PACKET | Síťová / Internetová | IP adresy (např. 192.168.1.1) | Router (Směrovač) |
+| RÁMEC (Frame) | Linková | MAC adresy (např. AA:BB:CC:11:22:33) | Switch (Přepínač) |
+| BITY | Fyzická | Žádné (jen elektrické/optické signály) | Kabely, Hub, Opakovač |

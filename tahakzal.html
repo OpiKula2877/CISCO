@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCNA1</title>
+</head>
+<body>
+    <div>
+    <a href="#chapter1">Kapitola 1: Základy sítí a síťové modely (OSI a TCP/IP) – Vrstvy, zapouzdření dat a charakteristiky moderních sítí.</a>
+    <a href="#chapter2">Kapitola 2: Fyzická vrstva a síťová média – Metalická kabeláž (UTP), optika, bezdrátové sítě a standardy.</a>
+    <a href="#chapter3">Kapitola 3: Ethernet a linková vrstva (L2) – MAC adresy, struktura rámce, přepínání (switching) a protokol ARP.</a>
+    <a href="#chapter4">Kapitola 4: Síťová vrstva (L3) a IP protokoly – Charakteristika IP, směrovací tabulky, TTL a ICMP.</a>
+    <a href="#chapter5">Kapitola 5: IPv4 a IPv6 adresování – Struktura adres, typy adres (Unicast, Multicast, Link-local) a SLAAC.</a>
+    <a href="#chapter6">Kapitola 6: Subnetting (Dělení sítí) – Výpočty masek, VLSM a efektivní využití adresního prostoru.</a>
+    <a href="#chapter7">Kapitola 7: Transportní vrstva (L4) – Porovnání TCP a UDP, čísla portů a řízení toku dat.</a>
+    <a href="#chapter8">Kapitola 8: Aplikační vrstva a síťové služby – Protokoly HTTP, DNS, DHCP, FTP a e-mailové služby.</a>
+    <a href="#chapter9">Kapitola 9: Základy Cisco IOS a konfigurace zařízení – Konfigurační režimy, zabezpečení přístupu, bannery a správa souborů.</a>
+    <a href="#chapter10">Kapitola 10: Bezpečnost, správa a diagnostika – Typy hrozeb, firewally, VPN, QoS a nástroje jako Ping a Tracert.</a>
+    <a href="#conclusion">Závěr: Shrnutí, doplnění + na co si dávat pozor<a/>
+    </div>
+
+    <h1 id="chapter1">Kapitola 1: Základy sítí a síťové modely</h1>
+    <p>Pro pochopení fungování sítí musíme data rozdělit do vrstev. Každá vrstva má svou specifickou funkci a komunikuje s vrstvami nad a pod sebou.</p>
+
+    <h2>1.1 Porovnání modelů OSI a TCP/IP</h2>
+    <p>V síťovém světě používáme dva hlavní modely. OSI model má 7 vrstev a je teoretickým standardem, zatímco TCP/IP model má 4 vrstvy a je základem dnešního internetu.</p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>OSI Vrstva</th>
+                <th>TCP/IP Vrstva</th>
+                <th>Funkce a příklady</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>7. Aplikační</td>
+                <td>Aplikační</td>
+                <td>Rozhraní pro aplikace (HTTP, DNS, FTP).</td>
+            </tr>
+            <tr>
+                <td>6. Prezentační</td>
+                <td>Aplikační</td>
+                <td>Formátování dat, šifrování, komprese.</td>
+            </tr>
+            <tr>
+                <td>5. Relační</td>
+                <td>Aplikační</td>
+                <td>Správa relací a dialogů mezi aplikacemi.</td>
+            </tr>
+            <tr>
+                <td>4. Transportní</td>
+                <td>Transportní</td>
+                <td>End-to-end komunikace, segmentace (TCP, UDP).</td>
+            </tr>
+            <tr>
+                <td>3. Síťová</td>
+                <td>Internetová</td>
+                <td>Logické adresování, směrování (IPv4, IPv6, ICMP).</td>
+            </tr>
+            <tr>
+                <td>2. Linková</td>
+                <td>Přístup k síti</td>
+                <td>Fyzické adresování (MAC), formátování rámců.</td>
+            </tr>
+            <tr>
+                <td>1. Fyzická</td>
+                <td>Přístup k síti</td>
+                <td>Přenos bitů po médiu (kabely, signály).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>Poznámka k zapouzdření (Encapsulation):</strong> Proces, kdy se k datům z vyšší vrstvy přidávají řídicí informace (hlavičky), se nazývá zapouzdření. Naopak proces odebírání hlaviček v cíli je odpouzdření. Pokud uživatel odesílá soubor přes FTP, data projdou všemi vrstvami TCP/IP modelu od aplikační až po síťový přístup.</p>
+
+    <h2>1.2 Klíčové vlastnosti moderních sítí</h2>
+    <p>Aby byla síť spolehlivá a výkonná, musí splňovat určité charakteristiky:</p>
+    <ul>
+        <li><strong>Odolnost vůči chybám (Fault Tolerance):</strong> Síť je navržena tak, aby při výpadku jedné cesty okamžitě aktivovala cestu záložní (např. sekundární připojení k ISP), aniž by to uživatel postřehl.</li>
+        <li><strong>Kvalita služeb (QoS - Quality of Service):</strong> Mechanismus pro prioritizaci provozu. Kritické aplikace (jako video a hlas) mají přednost před méně citlivými daty.</li>
+        <li><strong>Škálovatelnost (Scalability):</strong> Schopnost sítě růst a přidávat nové uživatele bez nutnosti kompletního přepracování infrastruktury.</li>
+        <li><strong>Bezpečnost (Security):</strong> Ochrana dat pomocí hesel, firewallů a autorizace uživatelů.</li>
+    </ul>
+
+    <h2>1.3 Prioritizace provozu (QoS)</h2>
+    <p>V rámci QoS se provoz dělí do kategorií podle důležitosti. Pokud máte v síti přetížené linky, zařízení se řídí následujícími prioritami (od nejvyšší po nejnižší):</p>
+    <ol>
+        <li><strong>Hlasová a video komunikace (Audio/Video Conference):</strong> Nejméně tolerantní ke zpoždění.</li>
+        <li><strong>Transakční data (např. finanční operace):</strong> Vyžadují spolehlivost a rychlou odezvu.</li>
+        <li><strong>Běžný webový provoz:</strong> Nejméně prioritní, uživateli nevadí mírné zpoždění při načítání stránky.</li>
+    </ol>
+
+    <h2>1.4 Protokoly a jejich standardy</h2>
+    <p>Protokoly definují pravidla komunikace, jako je kódování zpráv (převod na signály), velikost zpráv (segmentace) a možnosti doručení (Unicast, Multicast, Broadcast).</p>
+    <ul>
+        <li><strong>Otevřené standardy:</strong> Jsou protokoly, které může kdokoli volně používat a implementovat (např. TCP/IP). Podporují konkurenci a umožňují komunikaci zařízení od různých výrobců.</li>
+        <li><strong>Proprietární protokoly:</strong> Jsou vlastněny a kontrolovány jednou společností (např. některé starší protokoly Cisco nebo AppleTalk). Jejich definici a provoz řídí výhradně majitel.</li>
+    </ul>
+
+    <hr />
+
+    <p><strong>Praktické ověření v CLI (Cisco Command Line Interface):</strong> I když jsme v první kapitole, je dobré vědět, jak ověřit stav vrstvy 1 a 2 na zařízení Cisco.</p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Příkaz</th>
+                <th>Režim (Mód)</th>
+                <th>Popis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>show ip interface brief</code></td>
+                <td>Privilegovaný EXEC (#)</td>
+                <td>Zobrazí rychlý přehled rozhraní, jejich IP adresy a hlavně stav Layer 1 (Status) a Layer 2 (Protocol).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>Vysvětlení stavů z příkazu:</strong></p>
+    <ul>
+        <li><strong>Status: up / Protocol: up</strong> – Rozhraní je fyzicky zapojené a linková vrstva funguje (ideální stav).</li>
+        <li><strong>Status: administratively down</strong> – Rozhraní bylo vypnuto administrátorem příkazem <code>shutdown</code>.</li>
+    </ul>
+
+    <br>
+
+    <h1 id="chapter2">Kapitola 2: Fyzická vrstva a síťová média</h1>
+    <p>Fyzická vrstva (Layer 1) je zodpovědná za přenos bitů (0 a 1) přes komunikační médium. Transformuje digitální data na signály – elektrické impulzy, světelné záblesky nebo rádiové vlny.</p>
+
+    <h2>2.1 Metalická média (Měděná kabeláž)</h2>
+    <p>Měděné kabely jsou nejčastějším médiem v lokálních sítích. Data se zde přenáší jako elektrické impulzy.</p>
+    <ul>
+        <li><strong>Útlum (Attenuation):</strong> S rostoucí vzdáleností dochází ke ztrátě síly signálu. Pokud signál urazí příliš velkou vzdálenost, cílové zařízení ho nedokáže správně dekódovat.</li>
+        <li><strong>Rušení signálu:</strong> Měděné kabely jsou náchylné na vnější vlivy:
+            <ul>
+                <li><strong>EMI a RFI:</strong> Elektromagnetické a rádiové rušení (motory, fluorescenční světla). Způsobují zkreslení a chyby v datech.</li>
+                <li><strong>Přeslech (Crosstalk):</strong> Rušení způsobené magnetickým polem sousedních párů vodičů v jednom kabelu.</li>
+            </ul>
+        </li>
+        <li><strong>Ochrana proti rušení:</strong> Hlavní metodou u UTP (Unshielded Twisted Pair) kabelů je kroucení párů vodičů. Magnetická pole se díky tomu vzájemně vyruší.</li>
+        <li><strong>Standardy a instalace:</strong> Při výrobě kabelů se sledují standardy pro rozložení pinů (pinouts), maximální délku kabelu (pro Ethernet typicky 100 m) a typy konektorů (nejčastěji RJ-45).</li>
+    </ul>
+    <p><strong>Pozor na chyby při terminaci:</strong> Při zapojování konektoru RJ-45 nesmí být rozpletená část drátů příliš dlouhá a plastový plášť kabelu musí být pevně sevřen v konektoru. Pokud jsou vidět holé barevné dráty mimo konektor, je to špatně.</p>
+
+    <h2>2.2 Optická média (Fiber Optics)</h2>
+    <p>Optické kabely přenášejí data jako světelné pulzy. Jsou ideální pro páteřní spoje a propojení budov.</p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Vlastnost</th>
+                <th>Optika (Fiber)</th>
+                <th>Metalika (Copper/UTP)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Odolnost vůči EMI/RFI</strong></td>
+                <td>Úplná (nepoužívá elektřinu)</td>
+                <td>Nízká (náchylná k rušení)</td>
+            </tr>
+            <tr>
+                <td><strong>Kapacita dat</strong></td>
+                <td>Velmi vysoká</td>
+                <td>Nižší</td>
+            </tr>
+            <tr>
+                <td><strong>Cena</strong></td>
+                <td>Vyšší</td>
+                <td>Nižší</td>
+            </tr>
+            <tr>
+                <td><strong>Náročnost instalace</strong></td>
+                <td>Vyžaduje speciální školení na spojování a ukončování</td>
+                <td>Snadná (stačí krimpovací kleště)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>2.3 Bezdrátová média (Wireless)</h2>
+    <p>Bezdrátové sítě přenášejí data pomocí rádiových vln. Při návrhu je nutné řešit tři hlavní oblasti: oblast pokrytí, rušení (od jiných zařízení) a bezpečnost (signál se šíří všude kolem).</p>
+    <ul>
+        <li><strong>CSMA/CA (Collision Avoidance):</strong> Metoda řízení přístupu k médiu. Na rozdíl od drátového Ethernetu (CSMA/CD), kde se kolize detekují, se ve Wi-Fi kolizím předchází (Avoidance).</li>
+        <li><strong>ZigBee:</strong> Specifická technologie pro IoT a domácí automatizaci. Je oblíbená pro svou nízkou spotřebu energie a nízké nároky na přenosovou rychlost.</li>
+    </ul>
+
+    <h2>2.4 Porovnání metod řízení přístupu (Contention-based)</h2>
+    <p>Zatímco v moderních přepínaných (switched) sítích kolize téměř nenastávají, v dřívějších dobách nebo v bezdrátovém světě jsou tyto mechanismy klíčové:</p>
+    <ul>
+        <li><strong>CSMA/CD (Collision Detection):</strong> Používá se v Ethernetu (historicky na hubech). Zařízení naslouchá, zda je médium volné. Pokud dojde ke kolizi, pošle se jam signál, zařízení počkají náhodnou dobu (backoff algorithm) a zkusí to znovu.</li>
+        <li><strong>CSMA/CA (Collision Avoidance):</strong> Používá se ve Wi-Fi. Zařízení se snaží kolizím vyhnout, protože v bezdrátovém prostředí je těžké kolizi přímo detekovat.</li>
+    </ul>
+
+    <hr />
+
+    <p><strong>Praktické ověření stavu rozhraní (CLI):</strong> Když kontroluješ fyzickou vrstvu na přepínači nebo směrovači, zaměř se na výstup příkazu <code>show ip interface brief</code>.</p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Stav v CLI</th>
+                <th>Co to znamená?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>Status: up / Protocol: up</code></td>
+                <td>Fyzická vrstva (L1) i linková vrstva (L2) fungují.</td>
+            </tr>
+            <tr>
+                <td><code>Status: down / Protocol: down</code></td>
+                <td>Kabel není připojen, zařízení na druhé straně je vypnuté nebo je kabel vadný.</td>
+            </tr>
+            <tr>
+                <td><code>Status: administratively down</code></td>
+                <td>Port byl ručně vypnut administrátorem (příkazem <code>shutdown</code>).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>Užitečný příkaz pro zobrazení fyzických parametrů:</strong></p>
+    <p><code>show interfaces [název rozhraní]</code> – Zde uvidíš podrobnosti jako je MAC adresa (L2 identifikátor NIC karty), rychlost (speed) a duplex.</p>
+
+    <br>
+
+    <h1 id="chapter3">Kapitola 3: Ethernet a linková vrstva (L2)</h1>
+    <p>Linková vrstva (Layer 2) je zodpovědná za výměnu rámců (frames) přes společné lokální médium. Jejím hlavním úkolem je izolovat protokoly vyšších vrstev (jako IP) od informací o fyzickém médiu, které se k přenosu používá.</p>
+
+    <h2>3.1 Podvrstvy linkové vrstvy</h2>
+    <p>Linková vrstva se v technologii Ethernet dělí na dvě specifické podvrstvy, z nichž každá má svou unikátní roli:</p>
+    <ul>
+        <li><strong>LLC (Logical Link Control):</strong> Zajišťuje komunikaci mezi síťovým softwarem (horní vrstvy) a hardwarem rozhraní (dolní vrstvy). Její klíčovou funkcí je vložit do rámce informaci, která identifikuje, který protokol síťové vrstvy (např. IPv4 nebo IPv6) je v rámci zapouzdřen.</li>
+        <li><strong>MAC (Media Access Control):</strong> Odpovídá za zapouzdření dat a řízení přístupu k médiu. Provádí fyzické adresování (přidává zdrojovou a cílovou MAC adresu) a zajišťuje detekci chyb pomocí pole FCS (Frame Check Sequence).</li>
+    </ul>
+
+    <h2>3.2 Ptruktura Ethernetového rámce a MAC adresování</h2>
+    <p>Každé síťové rozhraní (NIC) má unikátní fyzickou adresu zvanou MAC adresa. Tato adresa má délku 48 bitů a dělí se na OUI (identifikátor výrobce) a unikátní identifikátor zařízení.</p>
+    <p>Klíčová pole v rámci:</p>
+    <ul>
+        <li><strong>Preamble:</strong> Identifikuje začátek rámce a synchronizuje komunikaci mezi uzly.</li>
+        <li><strong>Addressing:</strong> Obsahuje zdrojovou a cílovou MAC adresu pro doručení v rámci LAN.</li>
+        <li><strong>Type:</strong> Určuje, který protokol (např. IPv4) je uvnitř.</li>
+        <li><strong>FCS (Frame Check Sequence):</strong> Kontrolní součet (CRC), který cílové zařízení vypočítá znovu, aby ověřilo, zda nebyl rámec poškozen rušením nebo útlumem.</li>
+    </ul>
+    <p><strong>Důležité pravidlo:</strong> Zatímco IP adresa zůstává po celou cestu k cíli stejná, MAC adresy se mění na každém směrovači (hopu). Směrovač odstraní staré Layer 2 záhlaví a vytvoří nové pro další segment sítě.</p>
+
+    <h2>3.3 Protokol ARP (Address Resolution Protocol)</h2>
+    <p>Pokud zařízení zná cílovou IP adresu, ale nezná odpovídající MAC adresu, použije protokol ARP.</p>
+    <ul>
+        <li><strong>ARP Request:</strong> Odesílá se jako broadcast (na adresu FF:FF:FF:FF:FF:FF) všem zařízením v podsíti. Obsahuje dotaz: "Kdo má tuto IP adresu?".</li>
+        <li><strong>ARP Reply:</strong> Zařízení s danou IP adresou odpoví (unicastem) svou MAC adresou.</li>
+        <li><strong>Vzdálené sítě:</strong> Pokud je cíl v jiné síti, odesílatel pošle ARP dotaz na MAC adresu své výchozí brány (default gateway).</li>
+    </ul>
+    <p><strong>Nevýhody ARP:</strong> Příliš mnoho ARP zpráv může zahltit síť (flood), protože každé broadcastové volání musí zpracovat všechny uzly v segmentu.</p>
+
+    <h2>3.4 Metody přepínání v LAN (Switching)</h2>
+    <p>Přepínače (switche) používají různé metody pro předávání rámců z jednoho portu na druhý:</p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Metoda</th>
+                <th>Charakteristika</th>
+                <th>Výhody / Nevýhody</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Store-and-Forward</strong></td>
+                <td>Přijme celý rámec, zkontroluje chyby (FCS) a až pak ho odešle.</td>
+                <td>Nejspolehlivější, ale má nejvyšší latenci.</td>
+            </tr>
+            <tr>
+                <td><strong>Cut-Through</strong></td>
+                <td>Začne odesílat hned po přečtení cílové MAC adresy.</td>
+                <td>Velmi nízká latence, ale může přeposílat i poškozené rámce (runty).</td>
+            </tr>
+            <tr>
+                <td><strong>Fragment-Free</strong></td>
+                <td>Počká na prvních 64 bajtů (okno kolize) a pak odesílá.</td>
+                <td>Kompromis mezi rychlostí a kontrolou chyb.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr />
+
+    <p><strong>Praktické CLI příkazy a utility:</strong></p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Příkaz</th>
+                <th>Režim / Platforma</th>
+                <th>Popis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>show interfaces</code></td>
+                <td>Privilegovaný EXEC (#)</td>
+                <td>Zobrazí MAC adresu rozhraní a statistiky chyb.</td>
+            </tr>
+            <tr>
+                <td><code>arp -a</code></td>
+                <td>Windows Command Line</td>
+                <td>Zobrazí aktuální tabulku ARP (mapování IP na MAC) v počítači.</td>
+            </tr>
+            <tr>
+                <td><code>show mac address-table</code></td>
+                <td>Privilegovaný EXEC (#)</td>
+                <td>(Znalost nad rámec otázek) Zobrazí tabulku přepínače, kde vidíte, na kterém portu je jaká MAC adresa.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>Řešení problémů:</strong> Pokud můžete pingnout IP adresu, ale ne URL adresu (např. www.cisco.com), problém není v linkové vrstvě, ale v rozlišení jmen (DNS). K diagnostice pak slouží příkaz <code>nslookup</code>.</p>
+
+    <br>
+
+    <h1 id="chapter4">Kapitola 4: Síťová vrstva (L3) a IP protokoly</h1>
+    <p>Síťová vrstva (Layer 3) zajišťuje služby, které umožňují koncovým zařízením vyměňovat si data přes síť. Hlavním úkolem této vrstvy je směrování (routing), tedy hledání nejlepší cesty pro doručení paketů z jednoho internetworku do druhého.</p>
+
+    <h2>4.1 Klíčové funkce síťové vrstvy</h2>
+    <p>Síťová vrstva plní dvě základní role pro zajištění komunikace:</p>
+    <ul>
+        <li><strong>Adresování koncových zařízení:</strong> Poskytuje zařízením unikátní síťový identifikátor (IP adresu).</li>
+        <li><strong>Směrování paketů:</strong> Směruje datové pakety k cílovým hostitelům v jiných sítích.</li>
+    </ul>
+
+    <h2>4.2 Charakteristika protokolu IP</h2>
+    <p>Protokol IP (Internet Protocol) je základním protokolem této vrstvy. Mezi jeho hlavní vlastnosti patří:</p>
+    <ul>
+        <li><strong>Bezestavovost (Connectionless):</strong> IP nevyžaduje navázání vyhrazeného spojení před odesláním dat.</li>
+        <li><strong>Nezávislost na médiu:</strong> Funguje bez ohledu na to, zda se data přenáší po metalice, optice nebo bezdrátově.</li>
+        <li><strong>Best-effort doručení:</strong> IP negarantuje, že paket dorazí do cíle, ani nezajišťuje retransmisi v případě chyb (to je úkol vyšších vrstev).</li>
+    </ul>
+
+    <h2>4.3 Porovnání hlaviček IPv4 a IPv6</h2>
+    <p>Hlavičky obou protokolů obsahují pole Version, Source IP Address a Destination IP Address. Existují však klíčové rozdíly v tom, jak se řeší životnost paketu v síti.</p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Pole IPv4</th>
+                <th>Pole IPv6</th>
+                <th>Význam pole</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>TTL (Time-to-Live)</strong></td>
+                <td>Hop Limit</td>
+                <td>Omezuje počet skoků (routerů), kterými může paket projít.</td>
+            </tr>
+            <tr>
+                <td><strong>Header Checksum</strong></td>
+                <td>Odstraněno</td>
+                <td>IPv6 již v hlavičce nepoužívá kontrolní součet pro zrychlení zpracování routery.</td>
+            </tr>
+            <tr>
+                <td><strong>Protocol</strong></td>
+                <td>Next Header</td>
+                <td>Identifikuje protokol transportní vrstvy (např. TCP/UDP).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>Mechanismus TTL (Time-to-Live):</strong> Aby paket v síti nekroužil nekonečně dlouho (např. při směrovací smyčce), každý router, který paket přijme, sníží hodnotu v poli TTL (v IPv4) nebo Hop Limit (v IPv6) o 1. Pokud hodnota dosáhne nuly, router paket zahodí a pošle odesílateli zprávu ICMP Time Exceeded.</p>
+
+    <h2>4.4 Směrování a Výchozí brána (Default Gateway)</h2>
+    <p>Pokud hostitel potřebuje poslat zprávu do jiné (vzdálené) sítě, musí ji odeslat na svou výchozí bránu (Default Gateway).</p>
+    <ul>
+        <li><strong>Co je Default Gateway?</strong> Je to IP adresa rozhraní routeru, který je připojen ke stejné lokální síti jako hostitel.</li>
+        <li><strong>Důsledek špatné konfigurace:</strong> Pokud je brána nastavena chybně, hostitel může komunikovat v rámci své lokální sítě, ale nedostane se do cizích sítí ani na internet.</li>
+    </ul>
+
+    <h2>4.5 NAT (Network Address Translation)</h2>
+    <p>NAT se používá k řešení vyčerpání IPv4 adres. Umožňuje zařízením v privátní síti sdílet jednu nebo několik veřejných IP adres pro přístup k internetu.</p>
+    <ul>
+        <li><strong>Výhody:</strong> Zpomaluje vyčerpání IPv4 adres.</li>
+        <li><strong>Nevýhody:</strong> Způsobuje problémy některým aplikacím, které vyžadují přímou end-to-end konektivitu (např. IPsec nebo některé P2P aplikace).</li>
+    </ul>
+
+    <h2>4.6 Směrovací tabulka (Routing Table)</h2>
+    <p>Router používá směrovací tabulku k rozhodování o dalším postupu paketu. Bezprostředně po nalezení shody cílové adresy s přímo připojenou sítí router přepne paket na odpovídající rozhraní.</p>
+    <p>V tabulce najdeme různé zdroje cest (Source Codes):</p>
+    <ul>
+        <li><strong>C (Connected):</strong> Přímo připojená rozhraní routeru.</li>
+        <li><strong>S (Static):</strong> Cesty zadané správcem ručně, včetně výchozí statické cesty.</li>
+        <li><strong>L (Local):</strong> IP adresa přiřazená konkrétnímu rozhraní (používá se v moderních IOS).</li>
+    </ul>
+
+    <hr />
+
+    <p><strong>Praktické CLI příkazy pro diagnostiku síťové vrstvy:</strong></p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Příkaz</th>
+                <th>Režim / OS</th>
+                <th>Popis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>show ip route</code></td>
+                <td>Cisco (Privilegovaný EXEC)</td>
+                <td>Zobrazí směrovací tabulku routeru se všemi cestami a metrikami.</td>
+            </tr>
+            <tr>
+                <td><code>route print</code></td>
+                <td>Windows</td>
+                <td>Zobrazí směrovací tabulku počítače (stejný výsledek jako netstat -r).</td>
+            </tr>
+            <tr>
+                <td><code>ipconfig</code></td>
+                <td>Windows</td>
+                <td>Zobrazí konfiguraci IP, masky a výchozí brány počítače.</td>
+            </tr>
+            <tr>
+                <td><code>tracert [cíl]</code></td>
+                <td>Windows</td>
+                <td>Trasuje cestu paketu k cíli a zobrazuje čas odezvy na každém skoku (hopu).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>Doplňující kontext (ICMP):</strong> K diagnostice na L3 vrstvě neodmyslitelně patří protokol ICMP. V IPv4 se používá například pro ARP (Address Resolution Protocol), ale v IPv6 byla tato role nahrazena protokolem Neighbor Discovery Protocol (NDP) využívajícím zprávy Neighbor Solicitation a Neighbor Advertisement k zjištění MAC adresy souseda.</p>
+
+    <br>
+
+    <h1 id="chapter5">Kapitola 5: IPv4 a IPv6 adresování</h1>
+    <p>Adresování na síťové vrstvě umožňuje identifikaci zařízení v rámci sítě. Zatímco IPv4 používá 32bitové adresy, modernější IPv6 přechází na 128bitové adresy, aby vyřešil problém s jejich nedostatkem.</p>
+
+    <h2>5.1 Adresování IPv4</h2>
+    <p>Adresa IPv4 se skládá ze dvou částí: síťové části (Network) a hostitelské části (Host). Pro efektivní správu sítě rozlišujeme několik typů adres:</p>
+    <ul>
+        <li><strong>Veřejné adresy:</strong> Jsou celosvětově unikátní a směrovatelné v internetu (např. 198.133.219.2).</li>
+        <li><strong>Privátní adresy:</strong> Používají se v rámci interních sítí a nejsou směrovatelné v internetu. Patří sem rozsahy:
+            <ul>
+                <li>10.0.0.0/8</li>
+                <li>172.16.0.0/12 (např. 172.18.45.9)</li>
+                <li>192.168.0.0/16</li>
+            </ul>
+        </li>
+        <li><strong>Speciální rozsahy adres:</strong>
+            <ul>
+                <li><strong>Loopback (127.0.0.0/8):</strong> Slouží k testování TCP/IP stacku na lokálním zařízení (nejčastěji 127.0.0.1).</li>
+                <li><strong>Link-Local / APIPA (169.254.0.0/16):</strong> Automaticky přiděleny operačním systémem, pokud není dostupný DHCP server.</li>
+                <li><strong>TEST-NET (192.0.2.0/24):</strong> Vyhrazeny pro dokumentaci a výukové příklady.</li>
+                <li><strong>Experimentální adresy (240.0.0.0 až 255.255.255.254):</strong> Původně třída E, vyhrazeny pro budoucí použití.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>5.2 Struktura a typy IPv6 adres</h2>
+    <p>IPv6 adresa se zapisuje v hexadecimální soustavě a dělí se na tři hlavní části:</p>
+    <ul>
+        <li><strong>Global Routing Prefix:</strong> Část přidělená poskytovatelem (ISP).</li>
+        <li><strong>Subnet ID:</strong> Část využívaná organizací k identifikaci podsítí v rámci lokality. Například u adresy se zápisem /64 tvoří čtvrtý hexadecimální blok právě Subnet ID.</li>
+        <li><strong>Interface ID:</strong> Ekvivalent hostitelské části u IPv4, identifikuje konkrétní rozhraní.</li>
+    </ul>
+
+    <p>Klíčové typy IPv6 adres:</p>
+    <ul>
+        <li><strong>Global Unicast (GUA):</strong> Veřejně směrovatelná adresa.</li>
+        <li><strong>Link-Local (LLA):</strong> Adresy v rozsahu FE80::/10 až FEBF::/10. Slouží pro komunikaci pouze v rámci jednoho segmentu (linku).</li>
+        <li><strong>Multicast:</strong> Adresy začínající FF00::/8. Slouží k doručení paketu skupině zařízení. Příkladem je adresa ff02::2, která cílí na všechny nakonfigurované IPv6 směrovače na lokální lince.</li>
+        <li><strong>Unique Local:</strong> Rozsah FC00::/7, podobné privátním adresám IPv4.</li>
+    </ul>
+    <p><strong>Poznámka:</strong> Starší specifikace definovaly i tzv. Site-local adresy (FEC0::/10), které jsou však dnes považovány za zastaralé (deprecated).</p>
+
+    <h2>5.3 Mechanismy IPv6 (SLAAC, EUI-64 a DAD)</h2>
+    <p>IPv6 zavádí nové způsoby, jak mohou zařízení získat adresu bez nutnosti DHCP serveru:</p>
+    <ul>
+        <li><strong>SLAAC (Stateless Address Autoconfiguration):</strong> Zařízení si vygeneruje vlastní adresu na základě informací ze zpráv Router Advertisement (RA) od směrovače.</li>
+        <li><strong>EUI-64:</strong> Proces generování Interface ID z MAC adresy zařízení. MAC adresa (48 bitů) se rozdělí a doprostřed se vloží hodnota FFFE.</li>
+        <li><strong>DAD (Duplicate Address Detection):</strong> Než začne zařízení vygenerovanou adresu používat, musí ověřit, zda už ji nemá někdo jiný. K tomu odesílá zprávu ICMPv6 Neighbor Solicitation a čeká, zda se někdo ozve.</li>
+    </ul>
+
+    <h2>5.4 Praktická konfigurace a diagnostika</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Příkaz / Utility</th>
+                <th>Kontext / OS</th>
+                <th>Popis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>ipv6 unicast-routing</code></td>
+                <td>Cisco (Global Config)</td>
+                <td>Nezbytný příkaz, který povolí směrovači přeposílat IPv6 pakety a odesílat zprávy RA.</td>
+            </tr>
+            <tr>
+                <td><code>ipconfig</code></td>
+                <td>Windows</td>
+                <td>Zobrazí aktuální IP konfiguraci (IPv4 i IPv6), masku a bránu.</td>
+            </tr>
+            <tr>
+                <td><code>show ip interface brief</code></td>
+                <td>Cisco (Privilegovaný EXEC)</td>
+                <td>Zobrazí přehled IPv4 adres na rozhraních a jejich stav.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>Důležité pro zkoušku:</strong></p>
+    <ul>
+        <li>IPv6 nepoužívá masku podsítě (Subnet Mask) jako IPv4, ale používá délku prefixu (např. /64).</li>
+        <li>IPv6 nemá žádnou broadcastovou adresu; veškerá komunikace "pro všechny" probíhá pomocí multicastu.</li>
+        <li>U IPv6 adresy s prefixem /56 má organizace k dispozici 8 bitů pro vytváření vlastních podsítí (72 bitů celkem mínus 64 bitů pro Interface ID), což umožňuje vytvořit 256 podsítí.</li>
+    </ul>
+
+    <br>
+
+    <h1 id="chapter6">Kapitola 6: Subnetting (Dělení sítí)</h1>
+    <p>Dělení sítí (subnetting) je proces rozdělení jedné velké sítě na menší podsítě. Hlavním důvodem je snížení broadcastového provozu, zvýšení bezpečnosti a efektivnější využití adresního prostoru.</p>
+
+    <h2>6.1 Základní principy a vzorec pro výpočet</h2>
+    <p>Při vytváření podsítě musíme vždy počítat s tím, že v každém segmentu jsou dvě adresy nepoužitelné pro koncová zařízení:</p>
+    <ul>
+        <li><strong>Adresa sítě:</strong> První adresa v rozsahu, identifikuje podsíť jako celek.</li>
+        <li><strong>Broadcast adresa:</strong> Poslední adresa v rozsahu, slouží k oslovení všech zařízení v podsíti.</li>
+    </ul>
+    <p>Základní vzorec pro počet použitelných hostů: 2<sup>n</sup> − 2 (kde n je počet bitů zbývajících pro hostitelskou část).</p>
+
+    <h2>6.2 Výběr nejmenší vhodné masky (IPv4)</h2>
+    <p>Správce sítě musí umět vybrat masku, která pokryje počet zařízení a zároveň vyplýtvá co nejméně adres.</p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Počet zařízení</th>
+                <th>Potřebná maska</th>
+                <th>CIDR</th>
+                <th>Celkem adres</th>
+                <th>Použitelných hostů</th>
+                <th>Proč ne jinou?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>4</td>
+                <td>255.255.255.248</td>
+                <td>/29</td>
+                <td>8</td>
+                <td>6</td>
+                <td>Masky /30 mají jen 2 hosty, což nestačí.</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>255.255.255.240</td>
+                <td>/28</td>
+                <td>16</td>
+                <td>14</td>
+                <td>Maska /29 nabízí jen 6 hostů.</td>
+            </tr>
+            <tr>
+                <td>25</td>
+                <td>255.255.255.224</td>
+                <td>/27</td>
+                <td>32</td>
+                <td>30</td>
+                <td>Maska /28 nabízí jen 14 hostů.</td>
+            </tr>
+            <tr>
+                <td>40</td>
+                <td>255.255.255.192</td>
+                <td>/26</td>
+                <td>64</td>
+                <td>62</td>
+                <td>Maska /27 nabízí jen 30 hostů.</td>
+            </tr>
+            <tr>
+                <td>61</td>
+                <td>255.255.255.192</td>
+                <td>/26</td>
+                <td>64</td>
+                <td>62</td>
+                <td>Maska /27 by byla příliš malá.</td>
+            </tr>
+            <tr>
+                <td>100</td>
+                <td>255.255.255.128</td>
+                <td>/25</td>
+                <td>128</td>
+                <td>126</td>
+                <td>Maska /26 nabízí jen 62 hostů.</td>
+            </tr>
+            <tr>
+                <td>200</td>
+                <td>255.255.255.0</td>
+                <td>/24</td>
+                <td>256</td>
+                <td>254</td>
+                <td>Menší masky jako /25 nestačí.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>Příklad efektivního využití:</strong> Pokud máte v síti hostitele s adresou 192.168.1.96 a používáte masku /26 (síť 192.168.1.64), rozsah použitelných adres je 192.168.1.65 až 192.168.1.126. Adresa .96 je v tomto případě platným hostitelem.</p>
+
+    <h2>6.3 Plýtvání adresami (Wasted Addresses)</h2>
+    <p>Při návrhu sítě musíte dávat pozor na zbytečné plýtvání.</p>
+    <ul>
+        <li><strong>Příklad:</strong> Pokud použijete masku /26 (62 hostů) pro sériový spoj mezi dvěma routery (který potřebuje jen 2 adresy), vyplýtváte 60 adres.</li>
+        <li><strong>Řešení:</strong> Pro point-to-point spoje se ideálně používá maska /30 (255.255.255.252), která nabízí právě 2 použitelné adresy.</li>
+    </ul>
+
+    <h2>6.4 Subnetting u IPv6</h2>
+    <p>U IPv6 je dělení sítí mnohem jednodušší, protože se obvykle pracuje s fixní délkou Interface ID (64 bitů).</p>
+    <ul>
+        <li><strong>Subnet ID:</strong> V 128bitové IPv6 adrese je čtvrtý hexadecimální blok (hextet) vyhrazen pro identifikaci podsítě (Subnet ID).</li>
+        <li><strong>Příklad:</strong> Pokud má organizace přidělen blok /56, má k dispozici 8 bitů pro vytváření vlastních podsítí (rozdíl mezi /56 a standardním /64 pro koncový segment). To umožňuje vytvořit přesně 256 podsítí.</li>
+        <li><strong>Globální směrovací prefix:</strong> Část adresy přidělená poskytovatelem (ISP).</li>
+    </ul>
+
+    <h2>6.5 Praktické výpočty podsítí (Příklad /29)</h2>
+    <p>Při rozdělení sítě 192.168.10.0 pomocí prefixu /29 se sítě zvyšují po 8 adresách (protože 256 - 248 = 8):</p>
+    <ul>
+        <li>1. podsíť: .0 až .7</li>
+        <li>2. podsíť: .8 až .15 ...</li>
+        <li>5. podsíť: .32 až .39 (Síť: 192.168.10.32, První host: 192.168.10.33, Poslední host: 192.168.10.38, Broadcast: 192.168.10.39).</li>
+    </ul>
+
+    <hr />
+
+    <p><strong>Praktické CLI příkazy pro ověření podsítí:</strong></p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Příkaz</th>
+                <th>Režim</th>
+                <th>Popis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>show ip route</code></td>
+                <td>Privilegovaný EXEC (#)</td>
+                <td>Zobrazí směrovací tabulku, kde uvidíte sítě i s jejich maskami.</td>
+            </tr>
+            <tr>
+                <td><code>show running-config interface [id]</code></td>
+                <td>Privilegovaný EXEC (#)</td>
+                <td>Zobrazí přesnou IP adresu a masku nakonfigurovanou na rozhraní.</td>
+            </tr>
+            <tr>
+                <td><code>route print</code></td>
+                <td>Windows CLI</td>
+                <td>Zobrazí směrovací tabulku Windows hostitele včetně masek sítí.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <h1 id="chapter7">Kapitola 7: Transportní vrstva (TCP vs UDP)</h1>
+    <p>Zatímco síťová vrstva (L3) doručuje pakety mezi hostiteli, transportní vrstva (L4) je zodpovědná za komunikaci mezi konkrétními procesy (aplikacemi) běžícími na těchto hostitelích.</p>
+
+    <h2>7.1 Porty a sledování datových toků</h2>
+    <p>Aby počítač věděl, kterému programu má příchozí data předat, používá čísla portů.</p>
+    <ul>
+        <li><strong>Zdrojový port (Source Port):</strong> Je náhodně generován odesílajícím zařízením pro každou relaci. Slouží k tomu, aby počítač mohl sledovat více simultánních toků dat (např. dvě různá okna prohlížeče) a správně přiřadil vracející se data.</li>
+        <li><strong>Cílový port (Destination Port):</strong> Identifikuje konkrétní službu nebo aplikaci na serveru (např. port 80 pro webový server).</li>
+    </ul>
+
+    <h2>7.2 Porovnání protokolů TCP a UDP</h2>
+    <p>Transportní vrstva využívá dva hlavní protokoly, které se liší svou spolehlivostí a režií. Oba však shodně využívají čísla portů a kontrolní součet (checksum) k ověření integrity dat.</p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Vlastnost</th>
+                <th>TCP (Transmission Control Protocol)</th>
+                <th>UDP (User Datagram Protocol)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Typ spojení</strong></td>
+                <td>Spojově orientované (Connection-oriented)</td>
+                <td>Bezestavové (Connectionless)</td>
+            </tr>
+            <tr>
+                <td><strong>Spolehlivost</strong></td>
+                <td>Garantuje doručení a pořadí dat</td>
+                <td>Negarantuje doručení (Best-effort)</td>
+            </tr>
+            <tr>
+                <td><strong>Režie (Overhead)</strong></td>
+                <td>Vyšší (více řídicích informací)</td>
+                <td>Nízká (minimální zátěž sítě)</td>
+            </tr>
+            <tr>
+                <td><strong>Mechanismus</strong></td>
+                <td>Používá 3-cestné navazování spojení (handshake)</td>
+                <td>Žádné navazování spojení</td>
+            </tr>
+            <tr>
+                <td><strong>Příklady využití</strong></td>
+                <td>HTTP, FTP, SMTP, SSH</td>
+                <td>IP telefonie (VoIP), DHCP, TFTP, Video</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>7.3 Klíčové mechanismy TCP</h2>
+    <p>Protokol TCP obsahuje sofistikované nástroje pro řízení toku dat a zajištění jejich bezchybného doručení:</p>
+    <ul>
+        <li><strong>Sekvenční čísla (Sequence Numbers):</strong> Slouží k identifikaci chybějících segmentů a k jejich seřazení do správného pořadí v cíli.</li>
+        <li><strong>Potvrzování (Acknowledgment):</strong> Příjemce musí odesílateli potvrdit přijetí dat, než odesílatel pošle další segmenty.</li>
+        <li><strong>Okénko (Window Size):</strong> Určuje množství dat (v bajtech), které může odesílatel poslat, aniž by musel čekat na potvrzení.</li>
+        <li><strong>Sliding Window (Posuvné okénko):</strong> Mechanismus řízení toku, který umožňuje dynamicky snižovat rychlost odesílání, pokud je síť přetížená nebo vyrovnávací paměť příjemce plná.</li>
+        <li><strong>Retransmise:</strong> Pokud se segment ztratí nebo není potvrzen, TCP zajistí jeho opětovné zaslání.</li>
+    </ul>
+
+    <h2>7.4 Aplikační protokoly a jejich porty</h2>
+    <p>Zde je přehled důležitých protokolů, které se v otázkách CCNA často objevují, rozdělený podle transportního protokolu, který využívají:</p>
+
+    <p><strong>Využívají TCP (vyžadují spolehlivost):</strong></p>
+    <ul>
+        <li><strong>HTTP (80):</strong> Prohlížení webu.</li>
+        <li><strong>HTTPS (443):</strong> Zabezpečený web s šifrováním.</li>
+        <li><strong>FTP (20/21):</strong> Přenos souborů (port 21 pro řízení).</li>
+        <li><strong>SSH (22):</strong> Zabezpečený vzdálený přístup.</li>
+        <li><strong>Telnet (23):</strong> Nezabezpečený vzdálený přístup (data v čistém textu).</li>
+        <li><strong>SMTP (25):</strong> Odesílání e-mailů mezi servery.</li>
+        <li><strong>POP3 (110):</strong> Stahování e-mailů do klienta.</li>
+        <li><strong>IMAP (143):</strong> Čtení e-mailů přímo na serveru (umožňuje synchronizaci více zařízení).</li>
+    </ul>
+
+    <p><strong>Využívají UDP (vyžadují rychlost):</strong></p>
+    <ul>
+        <li><strong>DNS (53):</strong> Překlad doménových jmen na IP adresy (může využít i TCP).</li>
+        <li><strong>DHCP (67/68):</strong> Automatické přidělování IP adres.</li>
+        <li><strong>TFTP (69):</strong> Jednoduchý přenos souborů (např. bootování zařízení).</li>
+        <li><strong>RTP (Real-Time Transport Protocol):</strong> Přenos hlasu (VoIP) a videa v reálném čase.</li>
+    </ul>
+    <p><strong>Rozdíl mezi IMAP a POP:</strong> IMAP je pro malé organizace často výhodnější, protože zprávy zůstávají uloženy na serveru, dokud nejsou ručně smazány, což umožňuje přístup k poště z různých míst. POP3 typicky e-maily po stažení ze serveru odstraní.</p>
+
+    <hr />
+
+    <p><strong>Praktické ověření v CLI a diagnostika:</strong></p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Příkaz</th>
+                <th>OS / Mód</th>
+                <th>Popis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>netstat</code></td>
+                <td>Windows / Linux</td>
+                <td>Zobrazí aktivní TCP spojení běžící na hostiteli.</td>
+            </tr>
+            <tr>
+                <td><code>nslookup</code></td>
+                <td>Windows / Linux</td>
+                <td>Nástroj pro dotazování DNS serverů (ověření, zda funguje překlad jmen).</td>
+            </tr>
+            <tr>
+                <td><code>transport input ssh</code></td>
+                <td>Cisco (line vty)</td>
+                <td>Příkaz, který na virtuálních linkách povolí pouze šifrovaný přístup přes SSH a zablokuje ostatní (např. Telnet).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <h1 id="chapter8">Kapitola 8: Aplikační vrstva a síťové služby</h1>
+    <p>Aplikační vrstva představuje rozhraní mezi člověkem a sítí. V modelu TCP/IP tato vrstva zahrnuje funkce, které jsou v 7-vrstvém OSI modelu rozděleny do vrstev aplikační (7), prezentační (6) a relační (5).</p>
+
+    <h2>8.1 Síťové modely: Client-Server vs. Peer-to-Peer</h2>
+    <p>Aplikace mohou v síti komunikovat různými způsoby podle toho, jak jsou role rozděleny:</p>
+    <ul>
+        <li><strong>Model Klient-Server:</strong> Klient (např. tvůj prohlížeč) žádá o data a dedikovaný server (např. webový server Cisco) na tyto žádosti odpovídá.</li>
+        <li><strong>Model Peer-to-Peer (P2P):</strong> Zařízení mohou fungovat jako klient i server zároveň.
+            <ul>
+                <li><strong>P2P sítě:</strong> Jednoduché sítě bez dedikovaného serveru, kde se přímo sdílí zdroje (např. tiskárna připojená k domácímu PC a sdílená ostatním).</li>
+                <li><strong>P2P aplikace:</strong> Vyžadují uživatelské rozhraní a službu běžící na pozadí, umožňují sdílení souborů mezi mnoha uzly najednou.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>8.2 Webové služby a protokoly (HTTP a HTTPS)</h2>
+    <p>Pro prohlížení webu se využívají protokoly, které definují pravidla pro výměnu textu, obrázků a multimédií.</p>
+    <ul>
+        <li><strong>HTTP (Port 80):</strong> Základní protokol pro přenos webových stránek. Sám o sobě není šifrovaný.</li>
+        <li><strong>HTTPS (Port 443):</strong> Zabezpečená verze protokolu HTTP, která využívá šifrování (SSL/TLS) pro ochranu dat při přenosu mezi prohlížečem a serverem.</li>
+    </ul>
+
+    <h2>8.3 DNS – "Telefonní seznam" internetu</h2>
+    <p>Protokol DNS (Port 53) překládá člověkem čitelná doménová jména (např. www.cisco.com) na IP adresy, které potřebují routery k doručení paketů. DNS server uchovává různé typy záznamů:</p>
+    <ul>
+        <li><strong>A:</strong> IPv4 adresa koncového zařízení.</li>
+        <li><strong>AAAA:</strong> IPv6 adresa koncového zařízení.</li>
+        <li><strong>NS:</strong> Autoritativní jmenný server pro danou doménu.</li>
+        <li><strong>MX:</strong> Mail Exchange záznam (identifikuje e-mailový server).</li>
+    </ul>
+
+    <h2>8.4 E-mailové protokoly (SMTP, POP3, IMAP)</h2>
+    <p>Pro práci s e-maily se používá kombinace protokolů pro odesílání a příjem zpráv:</p>
+    <ul>
+        <li><strong>SMTP (Port 25):</strong> Slouží k odesílání e-mailů z klienta na server a také k přeposílání e-mailů mezi servery.</li>
+        <li><strong>POP3 (Port 110):</strong> Slouží k vyzvedávání pošty. E-maily se stáhnou ze serveru do lokální aplikace v počítači a na serveru se typicky smažou (nebo tam zůstanou jen krátce).</li>
+        <li><strong>IMAP (Port 143):</strong> Modernější protokol pro vyzvedávání pošty. Zprávy zůstávají na serveru, dokud je uživatel ručně nesmaže. To umožňuje synchronizaci mezi více zařízeními (mobil, PC, web).</li>
+    </ul>
+
+    <h2>8.5 Automatické přidělování adres (DHCP a BOOTP)</h2>
+    <p>Aby se IP adresy nemusely nastavovat ručně, používají se služby pro jejich dynamické přidělování.</p>
+    <ul>
+        <li><strong>DHCP (Port 67 server / 68 klient):</strong> Automaticky přiděluje IP adresy, masky, výchozí brány a adresy DNS serverů koncovým zařízením.</li>
+        <li><strong>BOOTP:</strong> Starší (legacy) protokol, který umožňoval bezdiskovým stanicím zjistit vlastní IP adresu a najít server pro zavedení systému (bootování).</li>
+    </ul>
+
+    <h2>8.6 Přenos souborů (FTP a TFTP)</h2>
+    <ul>
+        <li><strong>FTP (Port 20 pro data / 21 pro řízení):</strong> Vyžaduje navázání relace (přes TCP) a slouží k spolehlivému přenosu souborů mezi klientem a serverem.</li>
+        <li><strong>TFTP (Port 69):</strong> Jednodušší protokol (přes UDP) s nízkou režií, často používaný pro přenos konfiguračních souborů nebo obrazů operačních systémů síťových prvků.</li>
+    </ul>
+
+    <h3>Souhrnná tabulka aplikačních portů</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Protokol</th>
+                <th>Port</th>
+                <th>Transportní protokol</th>
+                <th>Účel (Správná vs. Špatná volba)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>SSH</strong></td>
+                <td>22</td>
+                <td>TCP</td>
+                <td>Zabezpečený vzdálený přístup (šifrovaný).</td>
+            </tr>
+            <tr>
+                <td><strong>Telnet</strong></td>
+                <td>23</td>
+                <td>TCP</td>
+                <td>Nezabezpečený vzdálený přístup (čistý text).</td>
+            </tr>
+            <tr>
+                <td><strong>DNS</strong></td>
+                <td>53</td>
+                <td>UDP/TCP</td>
+                <td>Překlad doménových jmen na IP adresy.</td>
+            </tr>
+            <tr>
+                <td><strong>HTTP</strong></td>
+                <td>80</td>
+                <td>TCP</td>
+                <td>Přenos webových stránek (nešifrovaný).</td>
+            </tr>
+            <tr>
+                <td><strong>HTTPS</strong></td>
+                <td>443</td>
+                <td>TCP</td>
+                <td>Přenos webových stránek (šifrovaný).</td>
+            </tr>
+            <tr>
+                <td><strong>POP3</strong></td>
+                <td>110</td>
+                <td>TCP</td>
+                <td>Stahování e-mailů do lokálního zařízení.</td>
+            </tr>
+            <tr>
+                <td><strong>IMAP</strong></td>
+                <td>143</td>
+                <td>TCP</td>
+                <td>Synchronizace e-mailů se serverem.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr />
+
+    <p><strong>Praktická diagnostika aplikační vrstvy:</strong></p>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nástroj / Příkaz</th>
+                <th>Kontext / OS</th>
+                <th>Popis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>nslookup</code></td>
+                <td>Windows/Linux</td>
+                <td>Umožňuje ručně dotazovat jmenné servery a ověřit překlad jména na adresu.</td>
+            </tr>
+            <tr>
+                <td><code>ipconfig /all</code></td>
+                <td>Windows</td>
+                <td>Zobrazí kompletní konfiguraci včetně nastaveného DNS serveru a DHCP serveru.</td>
+            </tr>
+            <tr>
+                <td><code>tracert [URL]</code></td>
+                <td>Windows</td>
+                <td>Pokud se nedaří načíst web, tracert ukáže, kde v cestě dochází k prodlevě.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <h1 id="chapter9">Kapitola 9: Základy Cisco IOS a konfigurace zařízení</h1>
+    <p>Cisco IOS (Internetwork Operating System) je rodina operačních systémů používaných na směrovačích a přepínačích Cisco. K jeho ovládání se využívá příkazová řádka (CLI), která je rozdělena do několika hierarchických režimů.</p>
+
+    <h2>9.1 Konfigurační režimy (Access Modes)</h2>
+    <p>Při práci v CLI je zásadní sledovat symbol na konci promptu (názvu zařízení), který určuje, co můžete v danou chvíli dělat.</p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Režim</th>
+                <th>Prompt</th>
+                <th>Popis a omezení</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>User EXEC</strong></td>
+                <td><code>Router&gt;</code></td>
+                <td>Základní režim pro prohlížení, nelze v něm měnit konfiguraci.</td>
+            </tr>
+            <tr>
+                <td><strong>Privileged EXEC</strong></td>
+                <td><code>Router#</code></td>
+                <td>Plný přístup pro zobrazení stavu a statistik. Vstupuje se příkazem <code>enable</code>.</td>
+            </tr>
+            <tr>
+                <td><strong>Global Configuration</strong></td>
+                <td><code>Router(config)#</code></td>
+                <td>Zde se provádějí změny, které ovlivňují celé zařízení. Vstupuje se příkazem <code>configure terminal</code> (nebo zkráceně <code>config t</code>).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>Častá chyba v praxi:</strong> Pokud se pokusíte zadat <code>configure terminal</code> přímo v režimu User EXEC (&gt;), zařízení vypíše chybu. Musíte se nejprve "povýšit" do privilegovaného režimu pomocí příkazu <code>enable</code>.</p>
+
+    <h2>9.2 Správa konfiguračních souborů</h2>
+    <p>Zařízení Cisco využívají dva hlavní typy paměti pro ukládání nastavení:</p>
+    <ul>
+        <li><strong>Running Configuration (RAM):</strong> Aktuálně běžící konfigurace. Jakákoliv změna se projeví okamžitě, ale při výpadku napájení se ztratí.</li>
+        <li><strong>Startup Configuration (NVRAM):</strong> Uložená konfigurace, která se načte při startu zařízení.</li>
+    </ul>
+    <p>Klíčové příkazy pro správu:</p>
+    <ul>
+        <li><code>show running-config</code>: Zobrazí aktuálně aktivní nastavení v RAM.</li>
+        <li><code>show startup-config</code>: Zobrazí obsah konfiguračního souboru uloženého v NVRAM.</li>
+        <li><code>copy running-config startup-config</code>: Uloží aktuální změny do trvalé paměti.</li>
+    </ul>
+    <p><strong>Poznámka:</strong> IOS obraz (samotný operační systém) je uložen ve flash paměti, zatímco bootstrap program (úvodní zavedení) je v ROM.</p>
+
+    <h2>9.3 Základní zabezpečení a příkazy</h2>
+    <p>Zabezpečení přístupu je prvním krokem každé konfigurace.</p>
+    <ul>
+        <li><strong>Šifrování hesel:</strong> Příkaz <code>service password-encryption</code> v globálním konfiguračním režimu zajistí, že všechna hesla (pro konzoli či telnet) budou v konfiguračním souboru ulozena v nečitelné (šifrované) podobě. Bez tohoto příkazu by mohl kdokoli s přístupem k souboru hesla snadno přečíst.</li>
+        <li><strong>Banner (Zpráva dne):</strong> Příkaz <code>banner motd # zpráva #</code> slouží k zobrazení varovného hlášení při přihlášení.</li>
+    </ul>
+    <p><strong>Tip pro testování:</strong> Nejrychlejší způsob, jak ověřit správnost banneru, je opustit privilegovaný režim příkazem <code>exit</code> a stisknout Enter. Restartování zařízení (reboot) nebo odpojení z napájení (power cycle) by sice banner také zobrazilo, ale je to zbytečně zdlouhavé a neefektivní.</p>
+
+    <h2>9.4 Konfigurace vzdáleného přístupu (VTY)</h2>
+    <p>Pro vzdálenou správu přepínačů a směrovačů používáme virtuální linky (VTY).</p>
+    <ul>
+        <li><strong>SSH (Secure Shell):</strong> Je preferovanou metodou, protože veškerá komunikace (včetně ID uživatele a hesla) je šifrovaná. Pro zprovoznění SSH je nutné nastavit název domény (<code>ip domain-name</code>) a vygenerovat šifrovací klíče (<code>crypto key generate rsa</code>).</li>
+        <li><strong>Telnet:</strong> Starší protokol (port 23), který posílá data v čistém textu a je považován za nezabezpečený.</li>
+        <li><strong>Příkaz transport input ssh:</strong> Pokud tento příkaz zadáte v konfiguraci linek VTY, zařízení bude přijímat pouze šifrovaná SSH spojení a automaticky zablokuje nezabezpečený Telnet.</li>
+    </ul>
+
+    <h2>9.5 Konfigurace IP na přepínači (Switch)</h2>
+    <p>I když je přepínač (Layer 2 switch) zařízení, které primárně pracuje s MAC adresami, potřebuje vlastní IP adresu pro účely vzdálené správy.</p>
+    <ul>
+        <li><strong>SVI (Switch Virtual Interface):</strong> IP adresa se na přepínači nepřiřazuje fyzickému portu, ale virtuálnímu rozhraní, typicky <code>interface vlan 1</code>.</li>
+        <li><strong>Výchozí brána:</strong> Aby mohl být přepínač spravován z jiné (vzdálené) sítě, musí mít nastavenou výchozí bránu pomocí příkazu <code>ip default-gateway [IP adresa]</code>. Bez tohoto nastavení by přepínač mohl komunikovat pouze se zařízeními ve své lokální síti.</li>
+    </ul>
+
+    <h2>9.6 Diagnostické příkazy v CLI</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Příkaz</th>
+                <th>Význam</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>show ip interface brief</code></td>
+                <td>Zobrazí rychlý přehled rozhraní, jejich IP adresy a stav (Layer 1 i Layer 2 status).</td>
+            </tr>
+            <tr>
+                <td><code>show interfaces</code></td>
+                <td>Zobrazí detailní informace včetně MAC adresy konkrétního rozhraní.</td>
+            </tr>
+            <tr>
+                <td><code>show ip route</code></td>
+                <td>Zobrazí směrovací tabulku (routing table).</td>
+            </tr>
+            <tr>
+                <td><code>ipv6 unicast-routing</code></td>
+                <td>Globální příkaz, který povolí směrování IPv6 a odesílání zpráv Router Advertisement (RA).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    
+    <h1 id="chapter10">Kapitola 10: Bezpečnost, správa a diagnostika</h1>
+    <p>Zabezpečení sítě není jednorázový úkon, ale neustálý proces ochrany dat a zařízení. Tato kapitola pokrývá typy hrozeb, obranné mechanismy a nástroje, které síťoví inženýři používají k ověření funkčnosti sítě.</p>
+
+    <h2>10.1 Typy hrozeb a malware</h2>
+    <p>Malware je souhrnné označení pro škodlivý kód. Je důležité rozlišovat mezi jeho jednotlivými formami, abychom zvolili správnou obranu.</p>
+    <ul>
+        <li><strong>Virus:</strong> Škodlivý kód, který se spouští na koncovém zařízení a ke svému šíření obvykle vyžaduje akci uživatele (např. otevření přílohy).</li>
+        <li><strong>Trojský kůň (Trojan horse):</strong> Škodlivý kód maskovaný jako legitimní software (např. doplněk pro tiskárnu). Může například na pozadí deaktivovat firewall.</li>
+        <li><strong>Červ (Worm):</strong> Samostatně se šířící kód, který zneužívá zranitelnosti a často způsobuje výrazné zpomalení sítě.</li>
+        <li><strong>Spyware:</strong> Software instalovaný bez vědomí uživatele, který sbírá informace o jeho aktivitě. Pokud se zaměřuje na zobrazování nevyžádané reklamy, mluvíme o Adware.</li>
+    </ul>
+
+    <h2>10.2 Metody síťových útoků</h2>
+    <p>Útočníci používají různé strategie k narušení provozu nebo získání dat:</p>
+    <ul>
+        <li><strong>DoS (Denial of Service):</strong> Útok zaměřený na zahlcení nebo pád zařízení či síťové služby, čímž se stane pro uživatele nedostupnou.</li>
+        <li><strong>Průzkum (Reconnaissance):</strong> Neoprávněné zjišťování informací o síti (mapování portů, služeb a zranitelností) před samotným útokem.</li>
+        <li><strong>Krádež identity (Identity Theft):</strong> Použití ukradených přihlašovacích údajů k přístupu k soukromým datům.</li>
+    </ul>
+
+    <h2>10.3 Mechanismy zabezpečení (AAA, Firewally, VPN)</h2>
+    <p>Pro ochranu firemních sítí se používají komplexní řešení, která jdou nad rámec běžného antiviru.</p>
+
+    <p><strong>AAA Framework:</strong></p>
+    <ul>
+        <li><strong>Authentication (Autentizace):</strong> Ověření identity uživatele (kdo to je).</li>
+        <li><strong>Authorization (Autorizace):</strong> Určení, k jakým zdrojům má uživatel přístup (např. právo "pouze pro čtení" ve složce Public).</li>
+        <li><strong>Accounting (Účtování):</strong> Záznam o tom, co uživatel v síti dělal.</li>
+    </ul>
+
+    <p><strong>Firewall:</strong> Filtruje provoz na základě pravidel.</p>
+    <ul>
+        <li><strong>Paketové filtry:</strong> Blokují přístup na základě IP nebo MAC adres.</li>
+        <li><strong>Aplikační filtry:</strong> Blokují provoz podle čísel portů (např. port 80 pro HTTP).</li>
+        <li><strong>URL filtry:</strong> Blokují přístup ke konkrétním webovým stránkám.</li>
+        <li><strong>Stateful Packet Inspection (SPI):</strong> Zabraňuje nevyžádaným příchozím relacím.</li>
+    </ul>
+
+    <p><strong>Další bezpečnostní prvky:</strong></p>
+    <ul>
+        <li><strong>VPN (Virtuální privátní síť):</strong> Šifrovaný tunel, který umožňuje vzdáleným uživatelům bezpečný přístup do vnitřní sítě organizace.</li>
+        <li><strong>IPS (Intrusion Prevention System):</strong> Systém, který monitoruje síť a aktivně blokuje zjištěné škodlivé aktivity.</li>
+    </ul>
+
+    <h2>10.4 Fyzické hrozby</h2>
+    <p>Kromě digitálních útoků musimusíme chránit hardware i před fyzickými vlivy:</p>
+    <ul>
+        <li><strong>Hardwarové hrozby:</strong> Fyzické poškození zařízení či kabeláže.</li>
+        <li><strong>Environmentální hrozby:</strong> Extrémní teploty nebo vlhkost.</li>
+        <li><strong>Elektrické hrozby:</strong> Výpadky napájení, podpětí nebo napěťové špičky.</li>
+        <li><strong>Údržbové hrozby:</strong> Špatné značení kabelů nebo nedostatek náhradních dílů.</li>
+    </ul>
+
+    <h2>10.5 Diagnostika sítě a nástroje</h2>
+    <p>Když uživatelé hlásí zpoždění nebo nedostupnost služeb, inženýři využívají sadu nástrojů k lokalizaci chyby.</p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nástroj</th>
+                <th>Účel diagnostiky</th>
+                <th>Co nám říká výsledek?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Ping</strong></td>
+                <td>Ověření Layer 3 konektivity.</td>
+                <td>Pokud ping na bránu selže, ale na internet projde, může jít o bezpečnostní pravidla (firewall) na bráně.</td>
+            </tr>
+            <tr>
+                <td><strong>Tracert</strong></td>
+                <td>Sledování cesty k cíli.</td>
+                <td>Ukazuje zpoždění na jednotlivých skocích. Router v cestě paket zahodí, jakmile jeho TTL klesne na nulu.</td>
+            </tr>
+            <tr>
+                <td><strong>Nslookup</strong></td>
+                <td>Diagnostika DNS.</td>
+                <td>Pomůže, pokud ping na IP funguje, ale na URL adresu (např. www.cisco.com) nikoliv.</td>
+            </tr>
+            <tr>
+                <td><strong>Netstat</strong></td>
+                <td>Kontrola aktivních spojení.</td>
+                <td>Zobrazí všechny otevřené TCP relace na hostiteli.</td>
+            </tr>
+            <tr>
+                <td><strong>Analýza provozu</strong></td>
+                <td>Zachycování paketů.</td>
+                <td>Pro získání reálného obrazu sítě se provoz zachycuje v době špičky (peak utilization) a na různých segmentech.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>Důležité:</strong> Pro správnou diagnostiku je nezbytné mít vytvořený výkonnostní základ (baseline), což jsou data reprezentující normální stav sítě. Bez něj nelze určit, zda je aktuální zpoždění anomálií nebo běžným jevem.</p>
+
+    <hr />
+
+    <p><strong>Praktické Cisco CLI příkazy pro zabezpečení:</strong></p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Příkaz</th>
+                <th>Režim</th>
+                <th>Popis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>service password-encryption</code></td>
+                <td>Globální konfigurační</td>
+                <td>Zašifruje všechna hesla v konfiguračním souboru, aby nebyla čitelná jako čistý text.</td>
+            </tr>
+            <tr>
+                <td><code>transport input ssh</code></td>
+                <td>Konfigurace line vty</td>
+                <td>Povolí pouze šifrovaný vzdálený přístup (SSH) a zablokuje nezabezpečený Telnet.</td>
+            </tr>
+            <tr>
+                <td><code>banner motd # zpráva #</code></td>
+                <td>Globální konfigurační</td>
+                <td>Nastaví varovnou zprávu při přihlášení.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <h1 id="conclusion">Závěr: Shrnutí, doplnění + na co si dávat pozor</h1>
+
+    <h2>1. Na co si dát pozor: Nejčastější "chytáky"</h2>
+    <ul>
+        <li><strong>ARP a vzdálené sítě:</strong> Pamatuj, že pokud hostitel posílá data do vzdálené sítě, neposílá ARP dotaz na MAC adresu cílového zařízení, ale na MAC adresu své výchozí brány (routeru). Router pak paket přebere a pošle dál.</li>
+        <li><strong>Proces TTL (Time-to-Live):</strong> Každý router, který přijme IPv4 paket, sníží (decrement) hodnotu v poli TTL o 1. Pokud je výsledek 0, router paket zahodí a pošle odesílateli zprávu ICMP Time Exceeded.</li>
+        <li><strong>Špatně nastavená výchozí brána:</strong> Pokud má počítač špatnou IP adresu výchozí brány, stále může komunikovat se zařízeními ve své lokální síti, ale nedostane se vůbec do internetu ani do jiných vzdálených sítí.</li>
+        <li><strong>LLC vs. MAC subvrstva:</strong> Tyto dvě se často pletou:
+            <ul>
+                <li><strong>LLC (Logical Link Control):</strong> Identifikuje protokol síťové vrstvy (IPv4/IPv6) a umožňuje jim sdílet médium.</li>
+                <li><strong>MAC (Media Access Control):</strong> Řeší fyzické adresování, přístup k médiu (CSMA/CD) a detekci chyb (FCS).</li>
+            </ul>
+        </li>
+        <li><strong>Ping vs. DNS:</strong> Pokud můžeš pingnout IP adresu (např. 8.8.8.8), ale nemůžeš pingnout jméno (např. www.google.com), problém není v konektivitě, ale v DNS serveru.</li>
+    </ul>
+
+    <h2>2. Velký přehled portů a protokolů (Rychlá referenční tabulka)</h2>
+    <p>Tato tabulka kombinuje všechna klíčová čísla portů, která se v otázkách objevují:</p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Port</th>
+                <th>Protokol</th>
+                <th>Typ (L4)</th>
+                <th>Účel</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>20/21</strong></td>
+                <td>FTP</td>
+                <td>TCP</td>
+                <td>Přenos souborů (21 pro řízení, 20 pro data).</td>
+            </tr>
+            <tr>
+                <td><strong>22</strong></td>
+                <td>SSH</td>
+                <td>TCP</td>
+                <td>Zabezpečený vzdálený přístup (šifrovaný).</td>
+            </tr>
+            <tr>
+                <td><strong>23</strong></td>
+                <td>Telnet</td>
+                <td>TCP</td>
+                <td>Nezabezpečený vzdálený přístup (čistý text).</td>
+            </tr>
+            <tr>
+                <td><strong>25</strong></td>
+                <td>SMTP</td>
+                <td>TCP</td>
+                <td>Odesílání e-mailů mezi servery.</td>
+            </tr>
+            <tr>
+                <td><strong>53</strong></td>
+                <td>DNS</td>
+                <td>UDP/TCP</td>
+                <td>Překlad doménových jmen na IP adresy.</td>
+            </tr>
+            <tr>
+                <td><strong>67/68</strong></td>
+                <td>DHCP</td>
+                <td>UDP</td>
+                <td>Automatické přidělování IP adres (67 server, 68 klient).</td>
+            </tr>
+            <tr>
+                <td><strong>69</strong></td>
+                <td>TFTP</td>
+                <td>UDP</td>
+                <td>Jednoduchý přenos souborů (např. konfigurace routeru).</td>
+            </tr>
+            <tr>
+                <td><strong>80</strong></td>
+                <td>HTTP</td>
+                <td>TCP</td>
+                <td>Webové stránky (nešifrované).</td>
+            </tr>
+            <tr>
+                <td><strong>110</strong></td>
+                <td>POP3</td>
+                <td>TCP</td>
+                <td>Stahování e-mailů ze serveru do klienta.</td>
+            </tr>
+            <tr>
+                <td><strong>143</strong></td>
+                <td>IMAP</td>
+                <td>TCP</td>
+                <td>Synchronizace e-mailů (zůstávají na serveru).</td>
+            </tr>
+            <tr>
+                <td><strong>443</strong></td>
+                <td>HTTPS</td>
+                <td>TCP</td>
+                <td>Webové stránky (zabezpečené šifrováním).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>3. Klíčové parametry fyzické vrstvy a médií</h2>
+    <p>Při instalaci a diagnostice kabeláže se drž těchto standardů:</p>
+    <ul>
+        <li><strong>UTP zakončení:</strong> Nesmí být vidět rozpletené barevné dráty mimo konektor; plastový plášť musí být pevně zakrimpován uvnitř konektoru.</li>
+        <li><strong>Rušení:</strong> Měděné kabely (UTP) jsou rušeny EMI (motory, světla) and RFI (rádiové vlny). Crosstalk (přeslech) se řeší kroucením párů vodičů v kabelu.</li>
+        <li><strong>Optika vs. Měď:</strong> Optika je dražší a náročnější na instalaci (svařování), ale je zcela imunní vůči EMI/RFI a má mnohem vyšší kapacitu.</li>
+        <li><strong>Bezdrát:</strong> Hlavní obavy u Wi-Fi jsou dosah pokrytí, rušení a bezpečnost. Pro IoT (chytrá domácnost) se kvůli nízké spotřebě používá ZigBee.</li>
+    </ul>
+
+    <h2>4. Rychlé shrnutí konfigurace Cisco (CLI)</h2>
+    <ul>
+        <li><strong>Zabezpečení konzole:</strong> Hesla v konfiguraci jsou čitelná, dokud nezapneš globální příkaz <code>service password-encryption</code>.</li>
+        <li><strong>Vzdálená správa:</strong> Příkaz <code>transport input ssh</code> na linkách VTY zajistí, že se nikdo nepřipojí nezabezpečeným Telnetem.</li>
+        <li><strong>Ukládání:</strong> Rozdíl mezi Running-config (v RAM, smaže se po restartu) a Startup-config (v NVRAM, trvalý). Ukládá se příkazem <code>copy running-config startup-config</code> (nebo zkráceně <code>copy run start</code>).</li>
+        <li><strong>IPv6 aktivace:</strong> Aby router mohl směrovat IPv6 a posílat zprávy Router Advertisement (RA), musí mít zapnutý příkaz <code>ipv6 unicast-routing</code>.</li>
+    </ul>
+
+    <h2>5. Diagnostika a bezpečnost v kostce</h2>
+    <p><strong>Malware:</strong></p>
+    <ul>
+        <li><strong>Virus:</strong> Vyžaduje akci uživatele k šíření.</li>
+        <li><strong>Worm (Červ):</strong> Šíří se sám a zahlcuje síť.</li>
+        <li><strong>Trojan:</strong> Maskuje se jako užitečný program (např. ovladač tiskárny), ale škodí (např. vypne firewall).</li>
+    </ul>
+    <p><strong>Další klíčové body:</strong></p>
+    <ul>
+        <li><strong>QoS priority:</strong> Pokud je v síti QoS, nejvyšší prioritu má vždy Hlas (Voice/Audio), pak transakční data (finance) a nejnižší běžný web.</li>
+        <li><strong>Baseline (Základna):</strong> Pokud chceš zjistit, zda je síť pomalá "normálně" nebo je to chyba, musíš mít naměřenou výkonnostní základnu (baseline) z doby běžného provozu.</li>
+        <li><strong>Cloud computing:</strong> Jeho hlavní výhodou je, že organizace může rozšiřovat své kapacity (infrastrukturu, software) bez nutnosti investovat do vlastního hardwaru a personálu.</li>
+    </ul>
+</body>
+</html>
