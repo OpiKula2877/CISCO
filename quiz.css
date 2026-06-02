@@ -110,14 +110,19 @@ body {
     background: var(--quiz-surface-strong);
     color: var(--text-color);
     font: inherit;
-    font-size: 1.45rem;
+    font-size: 1.2rem;
+    font-weight: 900;
     line-height: 1;
     cursor: pointer;
     flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
 }
 
 .nav-arrow:disabled {
-    opacity: 0.35;
+    opacity: 0.25;
     cursor: default;
 }
 
@@ -520,4 +525,30 @@ body {
         width: 100%;
         justify-content: center;
     }
+}
+
+.answers-grid[data-multi-select] .answer-button::before {
+    content: '☐ ';
+    font-size: 1.1em;
+}
+
+.answers-grid[data-multi-select] .answer-button.is-selected::before {
+    content: '☑ ';
+}
+
+.answers-grid[data-multi-select]::after {
+    content: 'Vyber jednu nebo více správných odpovědí';
+    display: block;
+    font-size: 0.82rem;
+    color: var(--accent-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+    order: -1;
+}
+
+.answers-grid[data-multi-select] {
+    display: flex;
+    flex-direction: column;
 }

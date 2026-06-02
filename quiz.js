@@ -101,7 +101,7 @@ const sampleQuestions = [
         id: 11,
         otazka: 'Administrátor navrhuje bezdrátovou síť. Které tři oblasti by měly být zohledněny? (Vyberte tři)',
         moznosti: ['Možnosti mobility', 'Bezpečnost', 'Rušení (Interference)', 'Oblast pokrytí', 'Kolize paketů', 'Rozsáhlá kabeláž'],
-        spravna_odpoved: [1-3],
+        spravna_odpoved: [1, 2, 3],
         kategorie: 4,
         vysvetleni: 'Při návrhu Wi-Fi jsou hlavními faktory oblast pokrytí, možné zdroje rušení a zabezpečení sítě [11].'
     },
@@ -141,7 +141,7 @@ const sampleQuestions = [
         id: 16,
         otazka: 'Technik chce ověřit IP adresu a DNS konfiguraci na PC a konektivitu k routeru. Které tři příkazy Windows použije? (Vyberte tři)',
         moznosti: ['netsh interface ipv6 show neighbor', 'arp -a', 'tracert', 'ping', 'ipconfig', 'nslookup'],
-        spravna_odpoved: [3-5],
+        spravna_odpoved: [3, 4, 5],
         kategorie: 10,
         vysvetleni: 'Ipconfig zobrazí nastavení IP, nslookup ověří DNS a ping otestuje konektivitu k bráně [16].'
     },
@@ -245,7 +245,7 @@ const sampleQuestions = [
         id: 29,
         otazka: 'Na základě úspěšného výstupu pingu, které dvě tvrzení jsou správná? (Vyberte dvě)',
         moznosti: ['Hostitel nemá nastavenou výchozí bránu', 'Mezi těmito zařízeními jsou 4 skoky (hops)', 'Průměrná doba přenosu je 2 milisekundy', 'Existuje konektivita mezi tímto zařízením a cílem', 'Konektivita umožňuje videokonference'],
-        spravna_odpoved: [3, 5],
+        spravna_odpoved: [3, 4],
         kategorie: 10,
         vysvetleni: 'Ping potvrzuje konektivitu na 3. vrstvě. Výstup také ukazuje počet skoků a průměrný čas odezvy (RTT). Úspěšný ping však nezaručuje, že aplikace (např. video) poběží bez problémů.'
     },
@@ -285,7 +285,7 @@ const sampleQuestions = [
         id: 34,
         otazka: 'Které dvě příčiny jsou běžné pro degradaci signálu (útlum) u UTP kabeláže? (Vyberte dvě)',
         moznosti: ['Ztráta světla na velké vzdálenosti', 'Nízká kvalita kabelů nebo konektorů', 'Nízká kvalita stínění v kabelu', 'Instalace kabelů do trubek', 'Nesprávné zakončení (termination)'],
-        spravna_odpoved: [2, 5],
+        spravna_odpoved: [1, 4],
         kategorie: 4,
         vysvetleni: 'Útlum (attenuation) v mědi je způsoben kvalitou materiálu a délkou. Špatné zakončení vodičů v konektoru RJ-45 způsobuje odrazy a přeslechy.'
     },
@@ -733,7 +733,7 @@ const sampleQuestions = [
         id: 90,
         otazka: 'Které dva typy provozu využívají protokol RTP (Real-Time Transport Protocol)? (Vyberte dvě)',
         moznosti: ['Web', 'Peer-to-peer', 'Přenos souborů', 'Video', 'Hlas (Voice)'],
-        spravna_odpoved: [4, 13],
+        spravna_odpoved: [3, 4],
         kategorie: 3,
         vysvetleni: 'RTP je navržen pro doručování audia a videa v reálném čase, což je klíčové pro VoIP a streamování médií [14].'
     },
@@ -892,7 +892,7 @@ const sampleQuestions = [
             'Optika poskytuje vyšší datovou kapacitu, ale je dražší než měděná kabeláž.',
             'Optický kabel je schopen odolat hrubému zacházení.'
         ],
-        spravna_odpoved: [6],
+        spravna_odpoved: [0, 3],
         kategorie: 4,
         vysvetleni: 'Optická média jsou dražší než měděná a jejich instalace vyžaduje speciální dovednosti, ačkoliv jsou imunní vůči elektromagnetickému rušení (EMI) [7].'
     },
@@ -985,7 +985,7 @@ const sampleQuestions = [
             'Subnet mask',
             'Broadcast address'
         ],
-        spravna_odpoved: [14, 15],
+        spravna_odpoved: [0, 1, 2],
         kategorie: 8,
         vysvetleni: 'Globální unicast adresa IPv6 se skládá ze směrovacího prefixu, ID podsítě a ID rozhraní [16].'
     },
@@ -1084,7 +1084,7 @@ const sampleQuestions = [
         id: 121,
         otazka: 'Které tři skutečnosti lze určit z výstupu příkazu "show ip interface brief"? (Vyberte tři)',
         moznosti: ['Dvě zařízení jsou připojena k přepínači', 'Výchozí SVI bylo nakonfigurováno', 'Přepínač lze spravovat vzdáleně', 'Byla nakonfigurována dvě fyzická rozhraní', 'Na přepínači byla nakonfigurována hesla', 'K fyzickému rozhraní je připojeno jedno zařízení'],
-        spravna_odpoved: [1-3],
+        spravna_odpoved: [1, 2, 3],
         kategorie: 9,
         vysvetleni: 'Výstup ukazuje, že rozhraní VLAN1 (SVI) má IP adresu a je "up", což umožňuje vzdálenou správu. Stav "up" u FastEthernet0/1 indikuje připojené a funkční zařízení [4, 5].'
     },
@@ -1100,7 +1100,7 @@ const sampleQuestions = [
         id: 123,
         otazka: 'Které dvě funkce poskytuje síťová vrstva? (Vyberte dvě)',
         moznosti: ['Přenos dat mezi procesy běžícími na zdrojovém a cílovém hostiteli', 'Směrování datových paketů k cílovým hostitelům v jiných sítích', 'Poskytování vyhrazených end-to-end spojení', 'Umístění dat na síťové médium', 'Poskytování unikátního síťového identifikátoru koncovým zařízením'],
-        spravna_odpoved: [1, 8],
+        spravna_odpoved: [1, 4],
         kategorie: 1,
         vysvetleni: 'Síťová vrstva odpovídá za směrování paketů mezi sítěmi a přidělování unikátních IP adres koncovým zařízením [9].'
     },
@@ -1124,7 +1124,7 @@ const sampleQuestions = [
         id: 126,
         otazka: 'Které tři normy se běžně dodržují při konstrukci a instalaci kabeláže? (Vyberte tři)',
         moznosti: ['Zapojení pinů (pinouts)', 'Pevnost plastového izolátoru v tahu', 'Délky kabelů', 'Typy konektorů', 'Cena za metr', 'Barva konektoru'],
-        spravna_odpoved: [2, 13],
+        spravna_odpoved: [0, 2, 3],
         kategorie: 4,
         vysvetleni: 'Standardy pro kabeláž určují fyzické parametry jako jsou typy konektorů (např. RJ-45), maximální délky kabelů pro zachování signálu a správné zapojení pinů [14, 15].'
     },
@@ -1196,7 +1196,7 @@ const sampleQuestions = [
         id: 135,
         otazka: 'Uživatel se pokouší o přístup na web bez úspěchu. Které dvě hodnoty konfigurace musí být nastaveny na hostiteli, aby byl tento přístup možný? (Vyberte dvě)',
         moznosti: ['Zdrojové číslo portu', 'HTTP server', 'Zdrojová MAC adresa', 'DNS server', 'Výchozí brána (default gateway)'],
-        spravna_odpoved: [8, 13],
+        spravna_odpoved: [3, 4],
         kategorie: 2,
         vysvetleni: 'DNS server je nutný pro překlad URL na IP adresu a výchozí brána umožňuje odesílání paketů mimo lokální síť [25].'
     },
@@ -1541,7 +1541,7 @@ const sampleQuestions = [
             'Provádět zachycování na různých segmentech sítě',
             'Zachycovat pouze WAN provoz'
         ],
-        spravna_odpoved: [1, 4],
+        spravna_odpoved: [2, 3],
         kategorie: 10,
         vysvetleni: 'Správná analýza vyžaduje data ze špičky a z různých míst sítě, aby byl zachycen lokální i vzdálený provoz.'
     },
@@ -1638,7 +1638,7 @@ function createPlaceholderQuestions(startId, totalCount) {
     return placeholders;
 }
 
-const allQuestions = [...sampleQuestions, ...createPlaceholderQuestions(6, 168)];
+const allQuestions = [...sampleQuestions];
 
 const dom = {
     goWebButton: document.getElementById('goWebButton'),
@@ -1695,7 +1695,7 @@ const state = {
 function isQuestionReady(question) {
     return Boolean(question.otazka && question.otazka.trim())
         && Array.isArray(question.moznosti)
-        && question.moznosti.length === 4
+        && question.moznosti.length >= 2
         && question.moznosti.every((option) => Boolean(option && option.trim()));
 }
 
@@ -1741,24 +1741,43 @@ function getSelectedQuestions() {
         .filter(Boolean);
 }
 
-function getCorrectIndex(question) {
-    if (typeof question.spravna_odpoved === 'number') {
+function isMultiSelect(question) {
+    return Array.isArray(question.spravna_odpoved);
+}
+
+function getCorrectIndexes(question) {
+    if (Array.isArray(question.spravna_odpoved)) {
         return question.spravna_odpoved;
     }
-
-    return question.moznosti.findIndex((option) => option === question.spravna_odpoved);
-}
-
-function isCorrectAnswer(question, answerIndex) {
-    return getCorrectIndex(question) === answerIndex;
-}
-
-function getAnswerLabel(question, answerIndex) {
-    if (answerIndex === null || answerIndex === undefined || answerIndex < 0) {
-        return 'Bez odpovědi';
+    if (typeof question.spravna_odpoved === 'number') {
+        return [question.spravna_odpoved];
     }
+    const idx = question.moznosti.findIndex((o) => o === question.spravna_odpoved);
+    return idx >= 0 ? [idx] : [0];
+}
 
-    return question.moznosti[answerIndex] ?? 'Bez odpovědi';
+function getCorrectIndex(question) {
+    return getCorrectIndexes(question)[0];
+}
+
+function isCorrectAnswer(question, answerValue) {
+    if (isMultiSelect(question)) {
+        if (!Array.isArray(answerValue)) return false;
+        const correct = getCorrectIndexes(question);
+        return correct.length === answerValue.length &&
+            correct.every((i) => answerValue.includes(i));
+    }
+    return getCorrectIndex(question) === answerValue;
+}
+
+function getAnswerLabel(question, answerValue) {
+    if (answerValue === null || answerValue === undefined) return 'Bez odpovědi';
+    if (Array.isArray(answerValue)) {
+        if (answerValue.length === 0) return 'Bez odpovědi';
+        return answerValue.map((i) => question.moznosti[i] ?? '?').join(', ');
+    }
+    if (answerValue < 0) return 'Bez odpovědi';
+    return question.moznosti[answerValue] ?? 'Bez odpovědi';
 }
 
 function shuffleArray(items) {
@@ -1795,11 +1814,18 @@ function updateQuickNavButtons() {
     });
 
     const viewport = dom.questionNavViewport;
-    const canScroll = viewport.scrollWidth > viewport.clientWidth + 4;
-    dom.questionNavPrev.hidden = !canScroll;
-    dom.questionNavNext.hidden = !canScroll;
-    dom.questionNavPrev.disabled = viewport.scrollLeft <= 2;
-    dom.questionNavNext.disabled = viewport.scrollLeft + viewport.clientWidth >= viewport.scrollWidth - 2;
+    const track = dom.questionNavTrack;
+
+    window.requestAnimationFrame(() => {
+        const hasOverflow = track.scrollWidth > viewport.offsetWidth + 1;
+
+        dom.questionNavPrev.hidden = false;
+        dom.questionNavNext.hidden = false;
+        dom.questionNavPrev.style.visibility = hasOverflow ? 'visible' : 'hidden';
+        dom.questionNavNext.style.visibility = hasOverflow ? 'visible' : 'hidden';
+        dom.questionNavPrev.disabled = track.scrollLeft <= 2;
+        dom.questionNavNext.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    });
 }
 
 function renderQuestionNavigation() {
@@ -1871,24 +1897,29 @@ function renderReviewList() {
         const correct = isCorrectAnswer(question, selectedAnswer);
         const questionNumber = getSelectedQuestions().findIndex((item) => item.id === question.id) + 1;
 
-        const optionsHtml = question.moznosti.map((optionText, optionIndex) => {
-            const optionClasses = ['answer-pill'];
-            const selectedIsWrong = typeof selectedAnswer === 'number' && selectedAnswer !== correctIndex;
+const correctIndexes = getCorrectIndexes(question);
+const selectedArray = Array.isArray(selectedAnswer)
+    ? selectedAnswer
+    : (typeof selectedAnswer === 'number' ? [selectedAnswer] : []);
 
-            if (optionIndex === selectedAnswer && selectedIsWrong) {
-                optionClasses.push('is-wrong');
-            }
+const optionsHtml = question.moznosti.map((optionText, optionIndex) => {
+    const optionClasses = ['answer-pill'];
+    const isSelectedByUser = selectedArray.includes(optionIndex);
+    const isCorrectOption = correctIndexes.includes(optionIndex);
 
-            if (optionIndex === correctIndex) {
-                optionClasses.push('is-correct');
-            }
+    if (isSelectedByUser && !isCorrectOption) {
+        optionClasses.push('is-wrong');
+    }
+    if (isCorrectOption) {
+        optionClasses.push('is-correct');
+    }
 
-            return `
-                <div class="${optionClasses.join(' ')}">
-                    ${String.fromCharCode(65 + optionIndex)}. ${optionText}
-                </div>
-            `;
-        }).join('');
+    return `
+        <div class="${optionClasses.join(' ')}">
+            ${String.fromCharCode(65 + optionIndex)}. ${optionText}
+        </div>
+    `;
+}).join('');
 
         return `
             <article class="review-card ${correct ? 'is-correct' : 'is-wrong'}">
@@ -1972,7 +2003,6 @@ function updateAvailableCount() {
     const availability = getCategoryAvailability(dom.categorySelect.value);
     const maxQuestions = availability.totalCount;
 
-    // Allow min 0 only when there are no questions; otherwise keep min 1
     dom.questionCount.min = maxQuestions === 0 ? '0' : '1';
     dom.questionCount.max = String(Math.max(maxQuestions, 0));
     dom.availableCountInfo.textContent = `K dispozici: ${maxQuestions} otázek`;
@@ -1982,7 +2012,6 @@ function updateAvailableCount() {
         dom.questionCount.value = String(maxQuestions);
     }
 
-    // Disable start when nothing is available
     dom.startQuizButton.disabled = maxQuestions === 0;
 }
 
@@ -2021,22 +2050,24 @@ function renderQuestion() {
 
     renderQuestionNavigation();
 
+    const multiSelect = isMultiSelect(currentQuestion);
+    const correctIndexes = getCorrectIndexes(currentQuestion);
+    const selectedAnswer = state.answers[currentQuestion.id];
+    const selectedArray = Array.isArray(selectedAnswer) ? selectedAnswer : (typeof selectedAnswer === 'number' ? [selectedAnswer] : []);
+
+    if (multiSelect) {
+        dom.answersGrid.dataset.multiSelect = 'true';
+    } else {
+        delete dom.answersGrid.dataset.multiSelect;
+    }
+
     dom.answersGrid.innerHTML = currentQuestion.moznosti.map((optionText, optionIndex) => {
-        const isSelected = state.answers[currentQuestion.id] === optionIndex;
-        const correctIndex = getCorrectIndex(currentQuestion);
+        const isSelected = selectedArray.includes(optionIndex);
         const classes = ['answer-button'];
 
-        if (isSelected) {
-            classes.push('is-selected');
-        }
-
-        if (state.completed && optionIndex === correctIndex) {
-            classes.push('is-correct');
-        }
-
-        if (state.completed && isSelected && optionIndex !== correctIndex) {
-            classes.push('is-wrong');
-        }
+        if (isSelected) classes.push('is-selected');
+        if (state.completed && correctIndexes.includes(optionIndex)) classes.push('is-correct');
+        if (state.completed && isSelected && !correctIndexes.includes(optionIndex)) classes.push('is-wrong');
 
         return `
             <button class="${classes.join(' ')}" type="button" data-question-id="${currentQuestion.id}" data-option-index="${optionIndex}" ${state.completed ? 'disabled' : ''}>
@@ -2049,7 +2080,10 @@ function renderQuestion() {
     const isLastQuestion = state.currentIndex >= selectedQuestions.length - 1;
     dom.nextQuestionButton.hidden = isLastQuestion;
     dom.finishQuizButton.hidden = !isLastQuestion;
-    dom.nextQuestionButton.disabled = typeof state.answers[currentQuestion.id] !== 'number';
+    const ans = state.answers[currentQuestion.id];
+    dom.nextQuestionButton.disabled = isMultiSelect(currentQuestion)
+        ? !Array.isArray(ans) || ans.length === 0
+        : typeof ans !== 'number';
     dom.finishQuizButton.disabled = selectedQuestions.length === 0;
     saveState();
 }
@@ -2216,34 +2250,46 @@ function wireEvents() {
     dom.reviewAllButton.addEventListener('click', () => setReviewFilter('all'));
 
     dom.questionNavPrev.addEventListener('click', () => {
-        const amount = Math.max(280, Math.floor(dom.questionNavViewport.clientWidth * 0.75));
-        dom.questionNavViewport.scrollBy({ left: -amount, behavior: 'smooth' });
-        window.setTimeout(updateQuickNavButtons, 150);
+        const amount = Math.max(280, Math.floor(dom.questionNavViewport.offsetWidth * 0.75));
+        dom.questionNavTrack.scrollBy({ left: -amount, behavior: 'smooth' });
+        window.setTimeout(updateQuickNavButtons, 300);
     });
 
     dom.questionNavNext.addEventListener('click', () => {
-        const amount = Math.max(280, Math.floor(dom.questionNavViewport.clientWidth * 0.75));
-        dom.questionNavViewport.scrollBy({ left: amount, behavior: 'smooth' });
-        window.setTimeout(updateQuickNavButtons, 150);
+        const amount = Math.max(280, Math.floor(dom.questionNavViewport.offsetWidth * 0.75));
+        dom.questionNavTrack.scrollBy({ left: amount, behavior: 'smooth' });
+        window.setTimeout(updateQuickNavButtons, 300);
     });
 
-    dom.questionNavViewport.addEventListener('scroll', updateQuickNavButtons, { passive: true });
+    dom.questionNavTrack.addEventListener('scroll', updateQuickNavButtons, { passive: true });
 
     window.addEventListener('resize', () => {
         updateQuickNavButtons();
     });
 
-    dom.answersGrid.addEventListener('click', (event) => {
-        const answerButton = event.target.closest('.answer-button');
-        if (!answerButton) {
-            return;
-        }
+dom.answersGrid.addEventListener('click', (event) => {
+    const answerButton = event.target.closest('.answer-button');
+    if (!answerButton || state.completed) return;
 
-        const questionId = Number(answerButton.dataset.questionId);
-        const optionIndex = Number(answerButton.dataset.optionIndex);
+    const questionId = Number(answerButton.dataset.questionId);
+    const optionIndex = Number(answerButton.dataset.optionIndex);
+    const question = getActiveQuestions().find((q) => q.id === questionId);
+    if (!question) return;
+
+    if (isMultiSelect(question)) {
+        const current = Array.isArray(state.answers[questionId]) ? [...state.answers[questionId]] : [];
+        const pos = current.indexOf(optionIndex);
+        if (pos >= 0) {
+            current.splice(pos, 1);
+        } else {
+            current.push(optionIndex);
+        }
+        state.answers[questionId] = current;
+    } else {
         state.answers[questionId] = optionIndex;
-        renderQuestion();
-    });
+    }
+    renderQuestion();
+});
 
     dom.questionNavTrack.addEventListener('click', (event) => {
         const button = event.target.closest('.question-nav-btn');
@@ -2285,7 +2331,6 @@ function initialize() {
 
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js').catch(() => {
-            // Registrace je best-effort, aby se kvíz nezasekl na chybě sítě.
         });
     }
 }
