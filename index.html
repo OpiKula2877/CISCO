@@ -19,6 +19,8 @@
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="CCNA1 Tahák - Základy sítí, Cisco IOS a bezpečnost">
         <meta name="twitter:description" content="Studijní tahák pro CCNA 1: modely sítí, IP adresace, subnetting, TCP/UDP, DNS, DHCP, IOS příkazy a bezpečnost.">
+        <link rel="manifest" href="/manifest.json">
+        <meta name="theme-color" content="#000000">
 
         <script type="application/ld+json">
         {
@@ -1189,6 +1191,15 @@
             </div>
         </aside>
     </div>
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then((reg) => console.log('Service Worker registrován!', reg))
+            .catch((err) => console.log('Chyba při registraci Service Workeru:', err));
+        });
+    }
+    </script>
 </body>
 <script src="tahak.js"></script>
 </html>
