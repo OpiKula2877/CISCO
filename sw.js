@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v2'; // <--- Kdykoliv změníš ikonu nebo web, změň tohle číslo (např. v2, v3...)
+const CACHE_NAME = 'v2.1'; // <--- Kdykoliv změníš ikonu nebo web, změň tohle číslo (např. v2, v3...)
 
 const ASSETS = [
   '/',
