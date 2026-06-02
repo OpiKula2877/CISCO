@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CCNA1 Kvíz</title>
+	<meta name="description" content="Interaktivní CCNA1 kvíz se 168 otázkami, kategoriemi, průběžným ukládáním postupu a podporou PWA i webového režimu.">
+	<meta name="theme-color" content="#0b1220">
+	<link rel="manifest" href="/manifest.json">
+	<link rel="stylesheet" href="tahak.css">
+	<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+	<div class="top-bar">
+        <a href="https://opikula.dev/projects.html" class="btn">← ZPĚT</a>
+		<div class="top-actions">
+				<button class="btn nav-switch-button" id="goWebButton" type="button">Web</button>
+			<button class="btn" id="themeToggle" onclick="toggleTheme()">Přepnout režim</button>
+		</div>
+	</div>
+
+	<div class="quiz-shell">
+		<div class="quiz-alert" id="webWarning" hidden>
+			V prohlížeči se postup ukládá jen do této relace. Po obnově stránky nebo zavření karty se kvíz smaže.
+		</div>
+
+		<section class="quiz-panel is-active" id="startScreen">
+			<div class="panel-copy">
+				<p class="eyebrow">CCNA1 quiz</p>
+				<h1>Kvíz pro opakování sítí, Cisco IOS a adresování</h1>
+				<p class="lead">
+					Vyber kategorii, počet otázek a zda se mají otázky promíchat. Otázky s kategorií <strong>null</strong>
+					se vždy přidávají ke každému výběru.
+				</p>
+			</div>
+
+			<div class="start-grid">
+				<label class="field">
+					<span>Kategorie</span>
+					<select id="categorySelect"></select>
+				</label>
+
+				<label class="field">
+					<span>Počet otázek</span>
+					<input id="questionCount" type="number" min="1" value="5">
+					<small id="availableCountInfo"></small>
+				</label>
+
+				<label class="checkbox-field">
+					<input id="shuffleToggle" type="checkbox">
+					<span>Náhodné pořadí otázek</span>
+				</label>
+			</div>
+
+			<div class="start-actions">
+				<button class="btn btn-primary" id="startQuizButton">Spustit kvíz</button>
+				<button class="btn btn-secondary" id="resetSavedButton" type="button">Smazat uložený postup</button>
+			</div>
+		</section>
+
+		<section class="quiz-panel" id="quizScreen" hidden>
+			<div class="quiz-meta">
+				<div>
+					<p class="eyebrow" id="quizCategoryLabel">Kategorie</p>
+					<h2 id="quizTitle">Otázka</h2>
+				</div>
+				<div style="display:flex;align-items:center;gap:8px;">
+					<div class="progress-chip" id="progressChip">0 %</div>
+					<button class="btn btn-secondary" id="backToSettingsButton" type="button">Zpět na nastavení</button>
+				</div>
+			</div>
+
+			<div class="progress-track" aria-hidden="true">
+				<div class="progress-fill" id="progressFill"></div>
+			</div>
+
+			<p class="question-counter" id="questionCounter"></p>
+			<div class="question-nav-shell" aria-label="Rychlá navigace mezi otázkami">
+				<button class="nav-arrow" id="questionNavPrev" type="button" aria-label="Předchozí blok">‹</button>
+				<div class="question-nav-viewport" id="questionNavViewport">
+					<div class="question-nav-track" id="questionNavTrack"></div>
+				</div>
+				<button class="nav-arrow" id="questionNavNext" type="button" aria-label="Další blok">›</button>
+			</div>
+			<p class="question-text" id="questionText"></p>
+			<div class="explanation-box" id="explanationBox" hidden>
+				<p class="eyebrow">Vysvětlení</p>
+				<p id="explanationText"></p>
+			</div>
+
+			<div class="answers-grid" id="answersGrid"></div>
+
+			<div class="quiz-actions">
+				<button class="btn btn-secondary" id="prevQuestionButton" type="button">Zpět</button>
+				<button class="btn btn-primary" id="nextQuestionButton" type="button">Další</button>
+				<button class="btn btn-secondary" id="finishQuizButton" type="button">Dokončit kvíz</button>
+			</div>
+
+		</section>
+
+		<section class="quiz-panel" id="resultScreen" hidden>
+			<div class="panel-copy">
+				<p class="eyebrow">Výsledek</p>
+				<h2>Hotovo</h2>
+				<p class="lead" id="resultSummary"></p>
+			</div>
+
+			<div class="result-grid">
+				<article class="result-card">
+					<span>Správně</span>
+					<strong id="correctCount">0</strong>
+				</article>
+				<article class="result-card">
+					<span>Špatně</span>
+					<strong id="wrongCount">0</strong>
+				</article>
+				<article class="result-card">
+					<span>Úspěšnost</span>
+					<strong id="resultPercent">0 %</strong>
+				</article>
+			</div>
+
+			<div class="result-toolbar">
+				<button class="btn btn-secondary is-active-filter" id="reviewWrongOnlyButton" type="button">Jen chyby</button>
+				<button class="btn btn-secondary" id="reviewAllButton" type="button">Všechny otázky</button>
+			</div>
+
+			<div id="reviewList" class="review-list"></div>
+
+			<div class="result-actions">
+				<button class="btn btn-primary" id="restartQuizButton" type="button">Spustit znovu</button>
+				<button class="btn btn-secondary" id="backToStartButton" type="button">Změnit nastavení</button>
+			</div>
+		</section>
+	</div>
+
+	<script src="tahak.js"></script>
+	<script src="quiz.js"></script>
+</body>
+</html>

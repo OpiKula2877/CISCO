@@ -31,9 +31,22 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.7;
-    font-size: 1.2rem; /* Velké, skvěle čitelné písmo */
+    font-size: 1.2rem;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* Keep page scroll working, but hide the visible right-side scrollbar. */
+html,
+body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
+}
+
 .top-bar {
     display: flex;
     justify-content: space-between;
@@ -64,6 +77,18 @@ body {
     transform: scale(0.98);
 }
 
+.nav-switch-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 7.5rem;
+    height: 2.7rem;
+    padding: 0 1.4rem;
+    line-height: 1;
+    text-align: center;
+    font-weight: 400;
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr 340px;
@@ -85,7 +110,7 @@ h1 {
     color: var(--text-color);
     border-bottom: 3px solid var(--accent-color);
     padding-bottom: 0.5rem;
-    scroll-margin-top: 90px; /* Odsazení při kliknutí z rozcestníku kvůli horní liště */
+    scroll-margin-top: 90px;
 }
 
 h2 {
