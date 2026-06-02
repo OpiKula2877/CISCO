@@ -1,20 +1,23 @@
-const CACHE_NAME = 'v1';
+const CACHE_NAME = 'v2'; // <--- Kdykoliv změníš ikonu nebo web, změň tohle číslo (např. v2, v3...)
+
 const ASSETS = [
   '/',
   '/index.html',
   '/manifest.json'
 ];
 
-// Instalace Service Workeru a nacachování souborů
+// Instalace a načtení základních souborů
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(ASSETS);
     })
   );
+  // Donutí nový Service Worker, aby se aktivoval okamžitě a nečekal na zavření aplikace
+  self.skipWaiting();
 });
 
-// Aktivace a smazání staré cache
+// Vyčištění staré cache po aktivaci nové verze
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keys) => {
@@ -27,11 +30,28 @@ self.addEventListener('activate', (e) => {
       );
     })
   );
+  self.clients.claim();
 });
 
-// Odpovídání z cache v případě offline režimu
+// Strategie: Stale-While-Revalidate (Načti z cache, ale na pozadí aktualizuj z webu)
 self.addEventListener('fetch', (e) => {
   e.respondWith(
-    fetch(e.request).catch(() => caches.match(e.request))
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.match(e.request).then((cachedResponse) => {
+        // Spustíme síťový požadavek na pozadí
+        const networkFetch = fetch(e.request).then((networkResponse) => {
+          // Pokud je síťový požadavek v pořádku, uložíme kopii do cache pro příště
+          if (networkResponse.status === 200) {
+            cache.put(e.request, networkResponse.clone());
+          }
+          return networkResponse;
+        }).catch(() => {
+          // Pokud síť selže (jsme offline), fetch selže, ale to neva, vrátí se cachedResponse
+        });
+
+        // Vrátíme cachedResponse hned (pokud existuje), jinak čekáme na síť
+        return cachedResponse || networkFetch;
+      });
+    })
   );
 });
