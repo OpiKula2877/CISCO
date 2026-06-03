@@ -1933,7 +1933,7 @@ const optionsHtml = question.moznosti.map((optionText, optionIndex) => {
 
                 <div class="review-meta">
                     <div class="answer-line"><strong>Tvoje odpověď:</strong> <span class="answer-pill ${correct ? 'is-correct' : 'is-wrong'}">${getAnswerLabel(question, selectedAnswer)}</span></div>
-                    <div class="answer-line"><strong>Správná odpověď:</strong> <span class="answer-pill is-correct">${getAnswerLabel(question, correctIndex)}</span></div>
+                    <div class="answer-line"><strong>Správná odpověď:</strong> <span class="answer-pill is-correct">${getAnswerLabel(question, getCorrectIndexes(question))}</span></div>
                 </div>
 
                 <div class="review-explanation">
