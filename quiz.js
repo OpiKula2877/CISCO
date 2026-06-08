@@ -29,7 +29,7 @@ const sampleQuestions = [
         id: 2,
         otazka: 'Které dvě funkce se provádějí v podvrstvě MAC linkové vrstvy OSI pro usnadnění komunikace přes Ethernet? (Vyberte dvě)',
         moznosti: ['Synchronizace komunikace pomocí vymezení polí rámce', 'Přidání zdrojové a cílové MAC adresy do rámce', 'Identifikace protokolu síťové vrstvy v rámci', 'Komunikace mezi síťovým softwarem a hardwarem NIC', 'Přidání řídicích informací Ethernetu k datům'],
-        spravna_odpoved: [1],
+        spravna_odpoved: [0, 1],
         kategorie: 5,
         vysvetleni: 'Podvrstva MAC zajišťuje vymezení polí (delimiting) pro synchronizaci a přidává fyzické (MAC) adresy do rámce [2].'
     },
@@ -37,7 +37,7 @@ const sampleQuestions = [
         id: 3,
         otazka: 'Které dvě funkce se provádějí v podvrstvě MAC linkové vrstvy OSI? (Případ B - Vyberte dvě)',
         moznosti: ['Implementace procesu vymezení polí v rámci Ethernet 2', 'Implementace traileru s kontrolním součtem (FCS) pro detekci chyb', 'Komunikace mezi horními vrstvami a hardwarem NIC', 'Přidání řídicích informací k síťovým datům', 'Identifikace protokolu síťové vrstvy'],
-        spravna_odpoved: [1],
+        spravna_odpoved: [0, 1],
         kategorie: 5,
         vysvetleni: 'MAC sublayer odpovídá za strukturu rámce, včetně vymezení polí a detekce chyb pomocí pole FCS [3].'
     },
@@ -45,7 +45,7 @@ const sampleQuestions = [
         id: 4,
         otazka: 'Které dvě funkce se provádějí v podvrstvě MAC linkové vrstvy OSI? (Případ C - Vyberte dvě)',
         moznosti: ['Implementace CSMA/CD přes starší poloduplexní média', 'Integrace Layer 2 toků mezi optikou a mědí', 'Komunikace s horními vrstvami softwaru', 'Přidání řídicích informací k datům', 'Umožnění IPv4 a IPv6 sdílet stejné fyzické médium'],
-        spravna_odpoved: [1],
+        spravna_odpoved: [0, 1],
         kategorie: 5,
         vysvetleni: 'MAC vrstva implementuje mechanismy řízení přístupu k médiu jako CSMA/CD a integruje toky dat mezi různými fyzickými standardy Ethernetu [4].'
     },
@@ -111,13 +111,14 @@ const sampleQuestions = [
         moznosti: ['Rozpletená délka vodičů je příliš dlouhá', 'Nemělo být odstraněno měděné stínění', 'Je použit špatný typ konektoru', 'Vodiče jsou pro konektor příliš tlusté'],
         spravna_odpoved: 0,
         kategorie: 4,
+        obrazek: 'img/12.jpg',
         vysvetleni: 'Při krimpování RJ-45 nesmí být rozpletená část vodičů příliš dlouhá a plášť kabelu musí být sevřen uvnitř konektoru [12].'
     },
     {
         id: 13,
         otazka: 'Které dva faktory mohou rušit měděnou kabeláž a způsobit zkreslení signálu a poškození dat? (Vyberte dva)',
         moznosti: ['EMI', 'Útlum signálu (Attenuation)', 'Přeslech (Crosstalk)', 'RFI', 'Prodloužená délka kabeláže'],
-        spravna_odpoved: [3],
+        spravna_odpoved: [0, 3],
         kategorie: 4,
         vysvetleni: 'EMI (elektromagnetické rušení) a RFI (rádiové rušení) ze zdrojů jako jsou motory nebo zářivky mohou poškodit signál v měděných kabelech [13].'
     },
@@ -205,7 +206,7 @@ const sampleQuestions = [
         id: 24,
         otazka: 'Které tři charakteristiky popisují proces CSMA/CD? (Vyberte tři)',
         moznosti: ['Po detekci kolize se zařízení pokusí o vysílání po náhodné prodlevě', 'Jam signál indikuje, že médium je volné', 'Všechna zařízení na segmentu vidí data procházející médiem', 'Zařízení s elektronickým tokenem může vysílat', 'Zařízení naslouchá a čeká, dokud není médium volné'],
-        spravna_odpoved: [1, 2],
+        spravna_odpoved: [0, 2, 4],
         kategorie: 5,
         vysvetleni: 'V CSMA/CD zařízení před vysíláním naslouchá (carrier sense). Pokud dojde ke kolizi, použije se náhodný algoritmus prodlevy (backoff) před dalším pokusem. Všechna zařízení na sdíleném médiu vidí provoz.'
     },
@@ -215,21 +216,23 @@ const sampleQuestions = [
         moznosti: ['Útok, který zpomalí nebo shodí síťovou službu', 'Škodlivý software nebo kód běžící na koncovém zařízení', 'Síťové zařízení filtrující přístup a provoz', 'Použití ukradených přihlašovacích údajů'],
         spravna_odpoved: 1,
         kategorie: 10,
+        obrazek: 'img/25.png',
         vysvetleni: 'Trojský kůň se maskuje jako legitimní software. Vyžaduje, aby ho uživatel nevědomky nainstaloval (např. stažením programu), a následně může škodit nebo umožnit neoprávněný přístup.'
     },
     {
         id: 26,
         otazka: 'Které tři požadavky definují protokoly používané v síťové komunikaci pro umožnění přenosu zpráv? (Vyberte tři)',
         moznosti: ['Instalace koncového zařízení', 'Výběr média', 'Kódování zpráv (encoding)', 'Možnosti doručení (delivery options)', 'Specifikace konektorů', 'Velikost zprávy (message size)'],
-        spravna_odpoved: [1, 3, 4],
+        spravna_odpoved: [2, 3, 5],
         kategorie: 1,
+        obrazek: 'img/26.webp',
         vysvetleni: 'Protokoly definují, jak je zpráva kódována pro přenos, jakou má mít velikost (např. MTU) a jakým způsobem se doručuje (Unicast, Multicast, Broadcast).'
     },
     {
         id: 27,
         otazka: 'Které dvě vlastnosti patří protokolu ARP? (Vyberte dvě)',
         moznosti: ['Pokud má zařízení cílovou IPv4 adresu, odpoví pomocí ARP reply', 'Hostitel se při zapouzdření dívá do tabulky MAC adres', 'Pokud nikdo neodpoví, uzel pošle broadcast datový paket všem', 'ARP request je poslán jako multicast na MAC adresu cíle', 'Pokud hostitel nezná MAC adresu cíle v lokální síti, generuje ARP broadcast'],
-        spravna_odpoved: [2],
+        spravna_odpoved: [0, 4],
         kategorie: 6,
         vysvetleni: 'ARP slouží k rozlišení MAC adresy z IP adresy. Pokud MAC není v tabulce, pošle se broadcast (FFFF.FFFF.FFFF). Cílové zařízení pak odpoví unicastem (ARP reply).'
     },
@@ -245,7 +248,7 @@ const sampleQuestions = [
         id: 29,
         otazka: 'Na základě úspěšného výstupu pingu, které dvě tvrzení jsou správná? (Vyberte dvě)',
         moznosti: ['Hostitel nemá nastavenou výchozí bránu', 'Mezi těmito zařízeními jsou 4 skoky (hops)', 'Průměrná doba přenosu je 2 milisekundy', 'Existuje konektivita mezi tímto zařízením a cílem', 'Konektivita umožňuje videokonference'],
-        spravna_odpoved: [3, 4],
+        spravna_odpoved: [2, 3],
         kategorie: 10,
         vysvetleni: 'Ping potvrzuje konektivitu na 3. vrstvě. Výstup také ukazuje počet skoků a průměrný čas odezvy (RTT). Úspěšný ping však nezaručuje, že aplikace (např. video) poběží bez problémů.'
     },
@@ -253,7 +256,7 @@ const sampleQuestions = [
         id: 30,
         otazka: 'Které dvě charakteristiky patří protokolu IP? (Vyberte dvě)',
         moznosti: ['Znovu posílá pakety při chybě', 'Garantuje doručení paketů', 'Nevyžaduje vyhrazené end-to-end spojení', 'Operuje nezávisle na síťovém médiu', 'Skládá pakety do správného pořadí u příjemce'],
-        spravna_odpoved: [1, 3],
+        spravna_odpoved: [2, 3],
         kategorie: 1,
         vysvetleni: 'IP je bezestavový (connectionless) a nezávislý na médiu. Negarantuje doručení ani správné pořadí; tyto funkce zajišťují protokoly vyšších vrstev (např. TCP).'
     },
@@ -295,13 +298,14 @@ const sampleQuestions = [
         moznosti: ['Zajišťuje, že webová stránka je doručena do správného okna prohlížeče ze dvou otevřených', 'Používá unikátní identifikátor vypálený v telefonu k hovoru', 'Formátuje obrazovku tak, aby se web zobrazil správně na jakémkoliv zařízení', 'Kóduje zvuk a obraz uvnitř hlavičky'],
         spravna_odpoved: 0,
         kategorie: 3,
+        obrazek: 'img/35.png',
         vysvetleni: 'Transportní vrstva využívá čísla portů ke sledování a oddělení různých komunikačních toků (relací) běžících na stejném zařízení.'
     },
     {
         id: 36,
         otazka: 'Které dva protokoly operují na nejvyšší vrstvě sady TCP/IP? (Vyberte dvě)',
         moznosti: ['POP', 'DNS', 'IP', 'TCP', 'Ethernet', 'UDP'],
-        spravna_odpoved: [5],
+        spravna_odpoved: [0, 1],
         kategorie: 2,
         vysvetleni: 'POP (pro poštu) a DNS (překlad jmen) jsou aplikační protokoly. TCP/UDP jsou transportní, IP je internetová a Ethernet je vrstva síťového přístupu.'
     },
@@ -309,7 +313,7 @@ const sampleQuestions = [
         id: 37,
         otazka: 'Spojení k ISP selhalo, ale záložní linka se aktivovala během sekund bez přerušení videokonference. Které tři charakteristiky sítě to popisuje? (Vyberte tři)',
         moznosti: ['integrita', 'škálovatelnost', 'quality of service (QoS)', 'fault tolerance (odolnost vůči chybám)', 'powerline networking', 'zabezpečení'],
-        spravna_odpoved: [1, 3, 4],
+        spravna_odpoved: [2, 3, 5],
         kategorie: 1,
         vysvetleni: 'Rychlá aktivace záložní linky je odolnost vůči chybám (fault tolerance). Požadavek na kvalitu videa řeší QoS a přihlášení uživatele je součástí zabezpečení.'
     },
@@ -325,7 +329,7 @@ const sampleQuestions = [
         id: 39,
         otazka: 'Které tři vrstvy OSI modelu se mapují na aplikační vrstvu TCP/IP modelu? (Vyberte tři)',
         moznosti: ['transportní', 'aplikační', 'síťová', 'relační', 'linková', 'prezentační'],
-        spravna_odpoved: [3, 5],
+        spravna_odpoved: [1, 3, 5],
         kategorie: 1,
         vysvetleni: 'Model TCP/IP slučuje horní tři vrstvy OSI modelu (aplikační, prezentační a relační) do jedné jediné aplikační vrstvy.'
     },
@@ -335,6 +339,7 @@ const sampleQuestions = [
         moznosti: ['127.0.0.1', '169.254.1.5', '192.0.2.1', '240.2.6.255', '172.18.45.9'],
         spravna_odpoved: 3,
         kategorie: 7,
+        obrazek: 'img/40.png',
         vysvetleni: 'Blok adres od 240.0.0.0 do 255.255.255.254 je vyhrazen pro experimentální účely a budoucí použití.'
     },
     {
@@ -495,6 +500,7 @@ const sampleQuestions = [
         moznosti: ['Vrstva 2 (Linková)', 'Vrstva 3 (Síťová)', 'Vrstva 4 (Transportní)', 'Vrstva 7 (Aplikační)'],
         spravna_odpoved: 1,
         kategorie: 1,
+        obrazek: 'img/60.jpg',
         vysvetleni: 'TTL je součástí IP hlavičky, která patří do 3. vrstvy (síťové). Slouží k zabránění nekonečného kroužení paketů [25].'
     },
     {
@@ -503,13 +509,14 @@ const sampleQuestions = [
         moznosti: ['Implementace silných hesel', 'Aktualizace operačního systému a aplikací', 'Instalace a aktualizace antivirového softwaru', 'Implementace RAID pole', 'Používání VPN'],
         spravna_odpoved: [1, 2],
         kategorie: 10,
+        obrazek: 'img/61.png',
         vysvetleni: 'Pravidelné aktualizace softwaru opravují bezpečnostní díry a antivirus aktivně detekuje a odstraňuje škodlivý kód. RAID je pro dostupnost dat, nikoliv ochranu před malwarem.'
     },
     {
         id: 62,
         otazka: 'Které tři kroky jsou vyžadovány pro konfiguraci routeru Cisco tak, aby přijímal pouze šifrovaná SSH spojení? (Vyberte tři)',
         moznosti: ['Nakonfigurovat IP doménové jméno', 'Povolit příchozí telnet na vty linkách', 'Vygenerovat SSH klíče', 'Povolit příchozí SSH na vty linkách', 'Vytvořit statické trasy'],
-        spravna_odpoved: [2, 3],
+        spravna_odpoved: [0, 2, 3],
         kategorie: 9,
         vysvetleni: 'SSH vyžaduje doménové jméno pro generování klíčů. Následně se musí klíče vygenerovat (crypto key generate rsa) a na vty linkách nastavit "transport input ssh".'
     },
@@ -613,7 +620,7 @@ const sampleQuestions = [
         id: 75,
         otazka: 'Které dvě jsou primární odpovědnosti subvrstvy Ethernet MAC? (Vyberte dvě)',
         moznosti: ['Přístup k médiu', 'Zapouzdření dat (Data encapsulation)', 'Logické adresování', 'Určování cesty paketů'],
-        spravna_odpoved: [1],
+        spravna_odpoved: [0, 1],
         kategorie: 5,
         vysvetleni: 'MAC subvrstva řeší, jak se rámec fyzicky umístí na kabel (přístup k médiu) a přidává k datům L2 hlavičku a patičku (zapouzdření).'
     },
@@ -631,6 +638,7 @@ const sampleQuestions = [
         moznosti: ['store-and-forward switching', 'ingress port buffering', 'cut-through switching', 'borderless switching'],
         spravna_odpoved: 0,
         kategorie: 5,
+        obrazek: 'img/77.png',
         vysvetleni: 'Store-and-forward jako jediná načte celý rámec a vypočítá FCS. Pokud nesouhlasí, rámec zahodí, aby nešířil chyby v síti.'
     },
     {
@@ -639,6 +647,7 @@ const sampleQuestions = [
         moznosti: ['Zprávy jsou stahovány a mazány ze serveru', 'Zprávy jsou uchovávány na serveru, dokud nejsou ručně smazány', 'IMAP je méně bezpečný než POP', 'POP umožňuje synchronizaci více zařízení'],
         spravna_odpoved: 1,
         kategorie: 2,
+        obrazek: 'img/78.png',
         vysvetleni: 'IMAP ponechává zprávy na serveru, což umožňuje uživatelům přistupovat ke stejným e-mailům z mobilu i počítače současně.'
     },
     {
@@ -663,6 +672,7 @@ const sampleQuestions = [
         moznosti: ['255.255.255.224', '255.255.255.240', '255.255.255.192', '255.255.255.0'],
         spravna_odpoved: 3,
         kategorie: 7,
+        obrazek: 'img/81.png',
         vysvetleni: 'Pro podporu 200 zařízení je nutné mít podsíť, která pojme alespoň 202 adres (200 pro hosty plus síťovou a broadcast adresu) [1]. Maska /24 (255.255.255.0) poskytuje 254 použitelných adres, což je nejmenší standardní maska splňující tento požadavek [1].'
     },
     {
@@ -677,8 +687,9 @@ const sampleQuestions = [
         id: 83,
         otazka: 'Které dvě charakteristiky sdílejí protokoly TCP a UDP? (Vyberte dvě)',
         moznosti: ['3-cestné navazování spojení (handshake)', 'Číslování portů', 'Výchozí velikost okénka (window size)', 'Použití kontrolního součtu (checksum)', 'Spojově orientovaná komunikace'],
-        spravna_odpoved: [3, 4],
+        spravna_odpoved: [1, 3],
         kategorie: 3,
+        obrazek: 'img/83.webp',
         vysvetleni: 'Oba protokoly používají čísla portů pro rozlišení datových toků a kontrolní součet pro ověření integrity přijatých dat [5]. TCP je na rozdíl od UDP spojově orientovaný a používá handshake [5].'
     },
     {
@@ -711,6 +722,7 @@ const sampleQuestions = [
         moznosti: ['255.255.255.240', '255.255.255.0', '255.255.255.248', '255.255.255.252'],
         spravna_odpoved: 0,
         kategorie: 7,
+        obrazek: 'img/87.webp',
         vysvetleni: 'Největší podsíť vyžaduje 10 adres, což spolu se síťovou a broadcast adresou vyžaduje masku s alespoň 4 bity pro hosty (2^4 = 16 adres) [9, 10]. Maska /28 (255.255.255.240) poskytuje 14 použitelných adres, což stačí [10].'
     },
     {
@@ -791,6 +803,7 @@ const sampleQuestions = [
         moznosti: ['Finanční transakce, web, audio', 'Finanční transakce, audio, web', 'Audio konference, finanční transakce, web', 'Audio konference, web, finanční transakce'],
         spravna_odpoved: 2,
         kategorie: 1,
+        obrazek: 'img/97.png',
         vysvetleni: 'Mechanismy QoS prioritizují hlasová data (audio) před transakčními daty, která mají přednost před běžným webovým provozem [21, 22].'
     },
     {
@@ -880,6 +893,7 @@ const sampleQuestions = [
         ],
         spravna_odpoved: 1,
         kategorie: 4,
+        obrazek: 'img/105.png',
         vysvetleni: 'Kroucení vodičů v párech způsobuje, že se jejich magnetická pole vzájemně vyruší, což pomáhá předcházet přeslechům [5].'
     },
     {
@@ -907,6 +921,7 @@ const sampleQuestions = [
         ],
         spravna_odpoved: 3,
         kategorie: 10,
+        obrazek: 'img/107.png',
         vysvetleni: 'Výkonnostní základna (baseline) obsahuje data o typickém provozu, proti kterým lze porovnat aktuální stav a zjistit anomálie [8].'
     },
     {
@@ -1065,6 +1080,7 @@ const sampleQuestions = [
         ],
         spravna_odpoved: 3,
         kategorie: 5,
+        obrazek: 'img/119.png',
         vysvetleni: 'Zatímco IP adresy zůstávají konstantní po celou cestu, MAC adresy se mění na každém routeru, protože mají význam pouze pro lokální segment sítě [22, 23].'
     },
     {
@@ -1156,7 +1172,7 @@ const sampleQuestions = [
         id: 130,
         otazka: 'Které dva příkazy lze použít na hostiteli se systémem Windows k zobrazení směrovací tabulky? (Vyberte dvě)',
         moznosti: ['route print', 'show ip route', 'netstat -r', 'netstat -s', 'tracert'],
-        spravna_odpoved: [2],
+        spravna_odpoved: [0, 2],
         kategorie: 10,
         vysvetleni: 'Příkazy "route print" i "netstat -r" vygenerují v systému Windows identický výstup zobrazující směrovací tabulku hostitele [19].'
     },
@@ -1174,6 +1190,7 @@ const sampleQuestions = [
         moznosti: ['192.168.0.0 /25', '192.168.0.128 /26', '192.168.0.192 /27', '192.168.0.224 /30'],
         spravna_odpoved: 1,
         kategorie: 7,
+        obrazek: 'img/132.png',
         vysvetleni: 'Prefix /26 poskytuje 64 adres (62 použitelných pro hosty), což je ideální pro sítě vyžadující kolem 60 hostů [22].'
     },
     {
@@ -1212,7 +1229,7 @@ const sampleQuestions = [
         id: 137,
         otazka: 'Které dvě zprávy ICMPv6 nejsou přítomny v protokolu ICMP pro IPv4? (Vyberte dvě)',
         moznosti: ['Router Advertisement', 'Destination Unreachable', 'Neighbor Solicitation', 'Route Redirection', 'Host Confirmation', 'Time Exceeded'],
-        spravna_odpoved: [2],
+        spravna_odpoved: [0, 2],
         kategorie: 8,
         vysvetleni: 'Zprávy Router Advertisement a Neighbor Solicitation jsou součástí protokolu NDP, který je specifický pro IPv6 [27].'
     },
@@ -1299,7 +1316,7 @@ const sampleQuestions = [
         id: 146,
         otazka: 'Síť 10.18.10.0/24 potřebuje podsíť pro 10 hostů. Které dvě adresy lze použít, aby se neplýtvalo místem a nedošlo ke kolizi s již přidělenými rozsahy (0-63 a 192-199)? (Vyberte dvě)',
         moznosti: ['10.18.10.224/27', '10.18.10.208/28', '10.18.10.200/27', '10.18.10.200/28', '10.18.10.224/28'],
-        spravna_odpoved: [2, 3],
+        spravna_odpoved: [1, 4],
         kategorie: 7,
         vysvetleni: 'Pro 10 hostů je potřeba maska /28 (14 použitelných adres). Adresy .208/28 a .224/28 jsou platné sítě v daném rozsahu, zatímco .200/28 není platným začátkem sítě.'
     },
@@ -1309,6 +1326,7 @@ const sampleQuestions = [
         moznosti: ['DNS', 'DHCP', 'POP3', 'SMTP'],
         spravna_odpoved: 2,
         kategorie: 2,
+        obrazek: 'img/147.png',
         vysvetleni: 'Port 110 je standardním portem pro protokol POP3 (stahování pošty).'
     },
     {
@@ -1336,7 +1354,7 @@ const sampleQuestions = [
         id: 150,
         otazka: 'Která dvě bezpečnostní řešení jsou typická především pro firemní (corporate) prostředí? (Vyberte dvě)',
         moznosti: ['Intrusion Prevention Systems (IPS)', 'Antivirový software', 'Antispyware', 'Silná hesla', 'Virtual Private Networks (VPN)'],
-        spravna_odpoved: [3],
+        spravna_odpoved: [0, 4],
         kategorie: 10,
         vysvetleni: 'IPS a firemní VPN pro vzdálený přístup jsou komplexní systémy typické pro organizace. Antiviry a hesla jsou běžné i v domácnostech.'
     },
@@ -1436,7 +1454,7 @@ const sampleQuestions = [
         id: 160,
         otazka: 'Které dvě zprávy ICMPv6 musí být povoleny, aby bylo možné v IPv6 rozlišit L3 adresu na L2 MAC adresu? (Vyberte dvě)',
         moznosti: ['echo requests', 'router solicitations', 'router advertisements', 'neighbor advertisements', 'echo replies', 'neighbor solicitations'],
-        spravna_odpoved: [4, 5],
+        spravna_odpoved: [3, 5],
         kategorie: 8,
         vysvetleni: 'V IPv6 se k zjištění MAC adresy používá Neighbor Discovery Protocol (NDP), který využívá zprávy Neighbor Solicitation a Neighbor Advertisement.'
     },
@@ -1464,7 +1482,7 @@ const sampleQuestions = [
             'Přidání MAC adres do rámce',
             'Umožňuje IPv4 a IPv6 sdílet stejné fyzické médium'
         ],
-        spravna_odpoved: [2, 3],
+        spravna_odpoved: [1, 4],
         kategorie: 5,
         vysvetleni: 'LLC identifikuje, pro který protokol (IPv4/v6) jsou data v rámci určena, a umožňuje tak koexistenci různých protokolů na stejném spoji.'
     },
@@ -1617,6 +1635,22 @@ const sampleQuestions = [
         spravna_odpoved: 0,
         kategorie: 10,
         vysvetleni: 'IPS aktivně analyzuje provoz a v případě detekce útoku nebo malwaru (např. červů) dokáže škodlivou aktivitu zablokovat.'
+    },
+    {
+        id: 176,
+        otazka: 'Přiřaďte každý typ rámcového pole k jeho funkci.',
+        typ: 'spoj',
+        kategorie: 5,
+        leva_strana: ['Error detection', 'Addressing', 'Frame start', 'Type'],
+        prava_strana: [
+            'Toto pole pomáhá nasměrovat rámec k jeho cíli.',
+            'Toto pole identifikuje začátek rámce.',
+            'Toto pole kontroluje, zda byl rám během přenosu poškozen.',
+            'Toto pole používá LLC k identifikaci protokolu vrstvy 3.'
+        ],
+
+        spravne_spojeni: [2, 0, 1, 3],
+        vysvetleni: 'Message encoding = převod formátu, encapsulation = zapouzdření, sizing = rozdělení na části.'
     }
 ];
 
@@ -1693,8 +1727,16 @@ const state = {
 };
 
 function isQuestionReady(question) {
-    return Boolean(question.otazka && question.otazka.trim())
-        && Array.isArray(question.moznosti)
+    if (!question.otazka || !question.otazka.trim()) return false;
+
+    // Typ spoj má místo moznosti leva/prava strana
+    if (question.typ === 'spoj') {
+        return Array.isArray(question.leva_strana) && question.leva_strana.length >= 2
+            && Array.isArray(question.prava_strana) && question.prava_strana.length >= 2
+            && Array.isArray(question.spravne_spojeni);
+    }
+
+    return Array.isArray(question.moznosti)
         && question.moznosti.length >= 2
         && question.moznosti.every((option) => Boolean(option && option.trim()));
 }
@@ -1746,6 +1788,7 @@ function isMultiSelect(question) {
 }
 
 function getCorrectIndexes(question) {
+    if (question.typ === 'spoj') return [];
     if (Array.isArray(question.spravna_odpoved)) {
         return question.spravna_odpoved;
     }
@@ -1757,10 +1800,15 @@ function getCorrectIndexes(question) {
 }
 
 function getCorrectIndex(question) {
+    if (question.typ === 'spoj') return 0;
     return getCorrectIndexes(question)[0];
 }
 
 function isCorrectAnswer(question, answerValue) {
+    if (question.typ === 'spoj') {
+        if (!Array.isArray(answerValue)) return false;
+        return question.spravne_spojeni.every((correct, i) => answerValue[i] === correct);
+    }
     if (isMultiSelect(question)) {
         if (!Array.isArray(answerValue)) return false;
         const correct = getCorrectIndexes(question);
@@ -1891,38 +1939,49 @@ function renderReviewList() {
         return;
     }
 
-    dom.reviewList.innerHTML = questions.map((question) => {
-        const selectedAnswer = state.answers[question.id];
-        const correctIndex = getCorrectIndex(question);
-        const correct = isCorrectAnswer(question, selectedAnswer);
-        const questionNumber = getSelectedQuestions().findIndex((item) => item.id === question.id) + 1;
+    dom.reviewList.innerHTML = '';
 
-const correctIndexes = getCorrectIndexes(question);
-const selectedArray = Array.isArray(selectedAnswer)
-    ? selectedAnswer
-    : (typeof selectedAnswer === 'number' ? [selectedAnswer] : []);
+    let i = 0;
 
-const optionsHtml = question.moznosti.map((optionText, optionIndex) => {
-    const optionClasses = ['answer-pill'];
-    const isSelectedByUser = selectedArray.includes(optionIndex);
-    const isCorrectOption = correctIndexes.includes(optionIndex);
+    function renderChunk() {
+        const end = Math.min(i + 20, questions.length);
 
-    if (isSelectedByUser && !isCorrectOption) {
-        optionClasses.push('is-wrong');
-    }
-    if (isCorrectOption) {
-        optionClasses.push('is-correct');
-    }
+        while (i < end) {
+            const question = questions[i];
+            const selectedAnswer = state.answers[question.id];
+            const correct = isCorrectAnswer(question, selectedAnswer);
+            const questionNumber = getSelectedQuestions().findIndex((item) => item.id === question.id) + 1;
 
-    return `
-        <div class="${optionClasses.join(' ')}">
-            ${String.fromCharCode(65 + optionIndex)}. ${optionText}
-        </div>
-    `;
-}).join('');
+            const correctIndexes = getCorrectIndexes(question);
+            const selectedArray = Array.isArray(selectedAnswer)
+                ? selectedAnswer
+                : (typeof selectedAnswer === 'number' ? [selectedAnswer] : []);
 
-        return `
-            <article class="review-card ${correct ? 'is-correct' : 'is-wrong'}">
+            const card = document.createElement('article');
+            card.className = `review-card ${correct ? 'is-correct' : 'is-wrong'}`;
+            const metaHtml = question.typ === 'spoj'
+                ? `<div class="review-meta">
+                    ${question.leva_strana.map((label, idx) => {
+                        const userChoice = Array.isArray(selectedAnswer) ? selectedAnswer[idx] : null;
+                        const correctChoice = question.spravne_spojeni[idx];
+                        const isRight = userChoice === correctChoice;
+                        return `
+                            <div class="answer-line" style="margin-bottom:0.4rem;">
+                                <strong>${label}:</strong>
+                                <span class="answer-pill ${isRight ? 'is-correct' : 'is-wrong'}">
+                                    ${userChoice !== null && userChoice !== undefined ? question.prava_strana[userChoice] : 'Bez odpovědi'}
+                                </span>
+                                ${!isRight ? `<span style="font-size:0.82rem;opacity:0.7;">→ správně:</span> <span class="answer-pill is-correct">${question.prava_strana[correctChoice]}</span>` : ''}
+                            </div>
+                        `;
+                    }).join('')}
+                </div>`
+                : `<div class="review-meta">
+                    <div class="answer-line"><strong>Tvoje odpověď:</strong> <span class="answer-pill ${correct ? 'is-correct' : 'is-wrong'}">${getAnswerLabel(question, selectedAnswer)}</span></div>
+                    <div class="answer-line"><strong>Správná odpověď:</strong> <span class="answer-pill is-correct">${getAnswerLabel(question, correctIndexes)}</span></div>
+                </div>`;
+
+            card.innerHTML = `
                 <div class="review-card-head">
                     <div>
                         <p class="eyebrow">Otázka ${questionNumber}</p>
@@ -1930,19 +1989,21 @@ const optionsHtml = question.moznosti.map((optionText, optionIndex) => {
                     </div>
                     <span class="answer-pill ${correct ? 'is-correct' : 'is-wrong'}">${correct ? 'Správně' : 'Špatně'}</span>
                 </div>
-
-                <div class="review-meta">
-                    <div class="answer-line"><strong>Tvoje odpověď:</strong> <span class="answer-pill ${correct ? 'is-correct' : 'is-wrong'}">${getAnswerLabel(question, selectedAnswer)}</span></div>
-                    <div class="answer-line"><strong>Správná odpověď:</strong> <span class="answer-pill is-correct">${getAnswerLabel(question, getCorrectIndexes(question))}</span></div>
-                </div>
-
+                ${metaHtml}
                 <div class="review-explanation">
                     <strong>Vysvětlení:</strong> <p>${question.vysvetleni || 'K této otázce zatím nebylo doplněno vysvětlení.'}</p>
                 </div>
+            `;
+            dom.reviewList.appendChild(card);
+            i++;
+        }
 
-            </article>
-        `;
-    }).join('');
+        if (i < questions.length) {
+            requestAnimationFrame(renderChunk);
+        }
+    }
+
+    renderChunk();
 }
 
 function saveState() {
@@ -2021,6 +2082,87 @@ function buildCategoryOptions() {
     }).join('');
 }
 
+function renderMatchQuestion(question) {
+    delete dom.answersGrid.dataset.multiSelect;
+
+    const currentAnswer = Array.isArray(state.answers[question.id])
+        ? [...state.answers[question.id]]
+        : question.leva_strana.map(() => 0);
+
+    // Okamžitě ulož do state, aby allAnswered fungovalo
+    if (!Array.isArray(state.answers[question.id])) {
+        state.answers[question.id] = [...currentAnswer];
+    }
+    dom.answersGrid.innerHTML = `
+        <div class="match-grid">
+            <div class="match-col match-col--left">
+                ${question.leva_strana.map((text, i) => `
+                    <div class="match-item match-item--left" data-index="${i}">${text}</div>
+                `).join('')}
+            </div>
+            <div class="match-col match-col--right">
+                ${question.prava_strana.map((text, i) => `
+                    <div class="match-item match-item--right" data-index="${i}">${text}</div>
+                `).join('')}
+            </div>
+        </div>
+        <div class="match-lines-wrap">
+            <svg class="match-svg" id="matchSvg"></svg>
+        </div>
+        <div class="match-selections">
+            ${question.leva_strana.map((text, i) => `
+                <div class="match-row">
+                    <span class="match-label">${text}</span>
+                    <select class="match-select" data-left="${i}" ${state.completed ? 'disabled' : ''}>
+                        <option value="">-- vyber --</option>
+                        ${question.prava_strana.map((opt, j) => `
+                            <option value="${j}" ${currentAnswer[i] === j ? 'selected' : ''}>${opt}</option>
+                        `).join('')}
+                    </select>
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    // Zobraz správnost po dokončení
+    if (state.completed) {
+        const rows = dom.answersGrid.querySelectorAll('.match-row');
+        rows.forEach((row, i) => {
+            const select = row.querySelector('.match-select');
+            const chosen = currentAnswer[i];
+            const correct = question.spravne_spojeni[i];
+            select.classList.toggle('is-correct', chosen === correct);
+            select.classList.toggle('is-wrong', chosen !== correct);
+        });
+    }
+
+    // Zpracuj změnu selectu
+    dom.answersGrid.querySelectorAll('.match-select').forEach((select) => {
+        select.addEventListener('change', () => {
+            const leftIndex = Number(select.dataset.left);
+            const rightIndex = select.value === '' ? null : Number(select.value);
+            const current = Array.isArray(state.answers[question.id])
+                ? [...state.answers[question.id]]
+                : question.leva_strana.map(() => 0);
+            current[leftIndex] = rightIndex;
+            state.answers[question.id] = current;
+            renderQuestion();
+        });
+    });
+
+    // Tlačítka
+    const isLast = state.currentIndex >= state.questionIds.length - 1;
+    dom.nextQuestionButton.hidden = isLast;
+    dom.finishQuizButton.hidden = !isLast;
+    const ans = state.answers[question.id];
+    const allAnswered = Array.isArray(ans) && ans.every((v) => v !== null);
+    dom.nextQuestionButton.disabled = !allAnswered;
+    dom.finishQuizButton.disabled = !allAnswered;
+    dom.prevQuestionButton.disabled = state.currentIndex === 0;
+
+    saveState();
+}
+
 function renderQuestion() {
     const selectedQuestions = getSelectedQuestions();
     const currentQuestion = selectedQuestions[state.currentIndex];
@@ -2039,6 +2181,17 @@ function renderQuestion() {
     dom.questionCounter.textContent = `Otázka ${state.currentIndex + 1} z ${selectedQuestions.length}`;
     dom.questionText.textContent = currentQuestion.otazka;
 
+    const existingImg = dom.quizScreen.querySelector('.question-image');
+    if (existingImg) existingImg.remove();
+
+    if (currentQuestion.obrazek) {
+        const img = document.createElement('img');
+        img.src = currentQuestion.obrazek;
+        img.alt = 'Obrázek k otázce';
+        img.className = 'question-image';
+        dom.questionText.insertAdjacentElement('afterend', img);
+    }
+
     dom.explanationBox.hidden = !state.completed;
     dom.explanationText.textContent = currentQuestion.vysvetleni || 'K této otázce zatím nebylo doplněno vysvětlení.';
 
@@ -2050,6 +2203,13 @@ function renderQuestion() {
 
     renderQuestionNavigation();
 
+// Typ spoj musí být zkontrolován DŘÍV než multiSelect logika
+    if (currentQuestion.typ === 'spoj') {
+        delete dom.answersGrid.dataset.multiSelect;
+        renderMatchQuestion(currentQuestion);
+        return;
+    }
+
     const multiSelect = isMultiSelect(currentQuestion);
     const correctIndexes = getCorrectIndexes(currentQuestion);
     const selectedAnswer = state.answers[currentQuestion.id];
@@ -2060,7 +2220,6 @@ function renderQuestion() {
     } else {
         delete dom.answersGrid.dataset.multiSelect;
     }
-
     dom.answersGrid.innerHTML = currentQuestion.moznosti.map((optionText, optionIndex) => {
         const isSelected = selectedArray.includes(optionIndex);
         const classes = ['answer-button'];
@@ -2267,29 +2426,29 @@ function wireEvents() {
         updateQuickNavButtons();
     });
 
-dom.answersGrid.addEventListener('click', (event) => {
-    const answerButton = event.target.closest('.answer-button');
-    if (!answerButton || state.completed) return;
+    dom.answersGrid.addEventListener('click', (event) => {
+        const answerButton = event.target.closest('.answer-button');
+        if (!answerButton || state.completed) return;
 
-    const questionId = Number(answerButton.dataset.questionId);
-    const optionIndex = Number(answerButton.dataset.optionIndex);
-    const question = getActiveQuestions().find((q) => q.id === questionId);
-    if (!question) return;
+        const questionId = Number(answerButton.dataset.questionId);
+        const optionIndex = Number(answerButton.dataset.optionIndex);
+        const question = getActiveQuestions().find((q) => q.id === questionId);
+        if (!question) return;
 
-    if (isMultiSelect(question)) {
-        const current = Array.isArray(state.answers[questionId]) ? [...state.answers[questionId]] : [];
-        const pos = current.indexOf(optionIndex);
-        if (pos >= 0) {
-            current.splice(pos, 1);
+        if (isMultiSelect(question)) {
+            const current = Array.isArray(state.answers[questionId]) ? [...state.answers[questionId]] : [];
+            const pos = current.indexOf(optionIndex);
+            if (pos >= 0) {
+                current.splice(pos, 1);
+            } else {
+                current.push(optionIndex);
+            }
+            state.answers[questionId] = current;
         } else {
-            current.push(optionIndex);
+            state.answers[questionId] = optionIndex;
         }
-        state.answers[questionId] = current;
-    } else {
-        state.answers[questionId] = optionIndex;
-    }
-    renderQuestion();
-});
+        renderQuestion();
+    });
 
     dom.questionNavTrack.addEventListener('click', (event) => {
         const button = event.target.closest('.question-nav-btn');
@@ -2304,6 +2463,22 @@ dom.answersGrid.addEventListener('click', (event) => {
         if (!isStandaloneMode) {
             saveState();
         }
+    });
+
+    const jumpInput = document.getElementById('questionJumpInput');
+    const jumpButton = document.getElementById('questionJumpButton');
+
+    function doJump() {
+        const val = parseInt(jumpInput.value, 10);
+        if (!isNaN(val)) {
+            goToQuestion(val - 1);
+            jumpInput.value = '';
+        }
+    }
+
+    jumpButton.addEventListener('click', doJump);
+    jumpInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') doJump();
     });
 }
 

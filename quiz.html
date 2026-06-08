@@ -71,13 +71,17 @@
 			</div>
 
 			<p class="question-counter" id="questionCounter"></p>
-			<div class="question-nav-shell" aria-label="Rychlá navigace mezi otázkami">
-				<button class="nav-arrow" id="questionNavPrev" type="button" aria-label="Předchozí blok">&#8592;</button>
-				<div class="question-nav-viewport" id="questionNavViewport">
-					<div class="question-nav-track" id="questionNavTrack"></div>
-				</div>
-				<button class="nav-arrow" id="questionNavNext" type="button" aria-label="Další blok">&#8594;</button>
-			</div>
+            <div class="question-nav-shell" aria-label="Rychlá navigace mezi otázkami">
+                <button class="nav-arrow" id="questionNavPrev" type="button" aria-label="Předchozí blok">&#8592;</button>
+                <div class="question-nav-viewport" id="questionNavViewport">
+                    <div class="question-nav-track" id="questionNavTrack"></div>
+                </div>
+                <button class="nav-arrow" id="questionNavNext" type="button" aria-label="Další blok">&#8594;</button>
+            </div>
+            <div class="question-jump-shell">
+                <input class="question-jump-input" id="questionJumpInput" type="number" min="1" placeholder="č. otázky">
+                <button class="btn btn-secondary" id="questionJumpButton" type="button">Přejít</button>
+            </div>
 			<p class="question-text" id="questionText"></p>
 			<div class="explanation-box" id="explanationBox" hidden>
 				<p class="eyebrow">Vysvětlení</p>
