@@ -2094,21 +2094,6 @@ function renderMatchQuestion(question) {
         state.answers[question.id] = [...currentAnswer];
     }
     dom.answersGrid.innerHTML = `
-        <div class="match-grid">
-            <div class="match-col match-col--left">
-                ${question.leva_strana.map((text, i) => `
-                    <div class="match-item match-item--left" data-index="${i}">${text}</div>
-                `).join('')}
-            </div>
-            <div class="match-col match-col--right">
-                ${question.prava_strana.map((text, i) => `
-                    <div class="match-item match-item--right" data-index="${i}">${text}</div>
-                `).join('')}
-            </div>
-        </div>
-        <div class="match-lines-wrap">
-            <svg class="match-svg" id="matchSvg"></svg>
-        </div>
         <div class="match-selections">
             ${question.leva_strana.map((text, i) => `
                 <div class="match-row">
