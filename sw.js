@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v2.9';
+const CACHE_NAME = 'v3';
 
 const ASSETS = [
   '/',
@@ -38,15 +38,13 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   e.respondWith(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.match(e.request).then((cachedResponse) => {
-        const networkFetch = fetch(e.request).then((networkResponse) => {
-          if (networkResponse.status === 200) {
-            cache.put(e.request, networkResponse.clone());
-          }
-          return networkResponse;
-        }).catch(() => {
-        });
-        return cachedResponse || networkFetch;
+      return fetch(e.request).then((networkResponse) => {
+        if (networkResponse.status === 200) {
+          cache.put(e.request, networkResponse.clone());
+        }
+        return networkResponse;
+      }).catch(() => {
+        return cache.match(e.request);
       });
     })
   );
